@@ -1,0 +1,248 @@
+@import url('https://fonts.googleapis.com/css2?family=Island+Moments&family=Monsieur+La+Doulaise&family=Permanent+Marker&display=swap');
+
+*, *::before, *::after {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+html {
+    scroll-behavior: smooth;
+    scroll-padding-top: 220px;
+    height: 100%;
+    width: 100%;       
+}
+
+body {
+    font-family: Arial, sans-serif;
+    line-height: 1.5;
+    color: #333;
+    background: #fff;
+    padding: 0;
+    min-height: 100%;
+    display: flex;
+    flex-direction: column;
+}
+
+.site-header {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    width: 100%;
+    background: #264559;
+    color: white;
+    text-align: center;
+    z-index: 1000;
+    padding: 10px 0;
+}
+
+/* ==================== HEADER CONTENT ==================== */
+.hello-title a {
+    font-family: 'Permanent Marker', cursive;
+    font-size: clamp(3rem, 10vw, 5rem);
+    color: white;
+    text-decoration: none;
+}
+
+.social-icons {
+    margin-bottom: 20px;
+    display: flex;
+    justify-content: center;
+    gap: 30px;
+}
+
+.social-icons a {
+    color: white;
+    font-size: 26px;
+    width: 50px;
+    height: 50px;
+    background: rgba(255, 255, 255, 0.15);
+    border-radius: 50%;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    transition: background 0.3s ease;
+}
+
+.social-icons a:hover {
+    background: #47b6e4;
+}
+
+.hamburger-checkbox {
+    display: none;
+}
+
+.hamburger {
+    position: absolute;
+    top: 20px;
+    right: 20px;
+    cursor: pointer;
+    z-index: 1001;
+    display: inline-block;
+}
+
+.hamburger span {
+    background: white;
+    width: 30px;
+    height: 4px;
+    margin: 5px 0;
+    display: block;
+    transition: all 0.3s ease;
+}
+
+.hamburger-checkbox:checked + .hamburger span:nth-child(1) {
+    transform: rotate(45deg) translate(5px, 5px);
+}
+
+.hamburger-checkbox:checked + .hamburger span:nth-child(2) {
+    opacity: 0;
+}
+
+.hamburger-checkbox:checked + .hamburger span:nth-child(3) {
+    transform: rotate(-45deg) translate(7px, -6px);
+}
+
+.main-nav {
+    max-height: 0;
+    overflow: hidden;
+    transition: max-height 0.4s ease-in-out;
+    position: absolute;
+    top: 100%;
+    left: 0;
+    width: 100%;
+    background: #264559;
+    padding: 0;
+    z-index: 999;
+}
+
+.hamburger-checkbox:checked ~ .main-nav {
+    max-height: 500px;
+}
+
+.nav-list {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 20px;
+}
+
+.nav-list li {
+    margin: 0;
+}
+
+.nav-list a {
+    color: white;
+    text-decoration: none;
+    font-weight: bold;
+    font-size: 1rem;
+    transition: color 0.3s ease;
+    display: block;
+    padding: 10px 20px;
+}
+
+.nav-list a:hover {
+    color: #47b6e4;
+}
+
+/* ==================== DESKTOP NAV ==================== */
+@media (min-width: 769px) {
+    .hamburger {
+        display: none;
+    }
+
+    .main-nav {
+        max-height: none;
+        overflow: visible;
+        display: flex;
+        position: static;
+        background: none;
+        padding: 0;
+        justify-content: center;
+        transition: none;
+    }
+
+    .nav-list {
+        flex-direction: row;
+        gap: 60px;
+    }
+
+    .nav-list a {
+        font-size: 1.1rem;
+        padding: 10px 0;
+        position: relative;
+    }
+
+    .nav-list a::after {
+        content: '';
+        position: absolute;
+        width: 0;
+        height: 3px;
+        bottom: 0;
+        left: 50%;
+        background: #47b6e4;
+        transition: all 0.4s ease;
+        transform: translateX(-50%);
+    }
+
+    .nav-list a:hover::after {
+        width: 100%;
+    }
+
+    .nav-list a:hover {
+        color: #47b6e4;
+    }
+}
+
+
+.resume-container {
+    max-width: 100%;
+    margin: 0 0 0; 
+    padding: 20px;
+    flex-grow: 1;
+    text-align: center;
+}
+
+.resume-container h2 {
+    font-family: 'Permanent Marker';
+    font-size: clamp(1.5rem, 5vw, 3rem);
+    margin-bottom: 20px;
+}
+
+.resume-container iframe {
+    width: 100%;
+    height: 80vh; 
+    min-height: 600px; 
+    border: 1px solid #ddd; 
+}
+
+.resume-container p {
+    margin-top: 10px;
+    font-size: 1rem;
+}
+
+@media (min-width: 769px) {
+    .resume-container {
+        width: 100%;
+        padding: 0.5in;
+        margin-top: 250px; 
+    }
+
+    .resume-container iframe {
+        height: 1000px; 
+    }
+}
+
+
+@media print {
+    .resume-container iframe {
+        display: none;
+    }
+    .resume-container p {
+        font-size: 12pt;
+        text-align: center;
+    }
+}

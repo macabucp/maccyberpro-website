@@ -5,20 +5,15 @@
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
         <title>HELLO! - Christopher Macabugao</title>
 
-        <link 
-            rel="stylesheet" 
-            href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css" 
-        />
-        
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css"/>
         <link rel="preconnect" href="https://fonts.googleapis.com">
-        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
         <link href="https://fonts.googleapis.com/css2?family=Island+Moments&family=Monsieur+La+Doulaise&family=Permanent+Marker&family=Quicksand:wght@300..700&display=swap" rel="stylesheet">
-        
         <link rel="stylesheet" href="index.css" />
     </head>
 
     <body>
-        
+        <!-- =================================== HEADER =================================== -->
         <header class="site-header">
             <input type="checkbox" id="hamburger" class="hamburger-checkbox">
             <label for="hamburger" class="hamburger" aria-label="Toggle menu">
@@ -33,7 +28,8 @@
                     <li><a href="#skills">Skills</a></li>
                     <li><a href="#future-dev">Current Projects</a></li>
                     <li><a href="#contact">Contact</a></li>
-                    <li><a href="myResume.html">My Resume</a></li>
+                    <li><a href="blog1.html">Blog</a></li>
+                    <li><a href="myResume.html" target="_blank">My Resume</a></li>
                 </ul>
             </nav>
 
@@ -42,49 +38,72 @@
             </h1>
         </header>
 
+        <!-- =================================== MAIN CONTENT =================================== -->
         <main>
-            
+
+            <!-- ============================ WELCOME / HERO SECTION ============================ -->
             <section id="welcome" class="welcome-section">
-    <div class="container welcome-container">
-        
-        <div class="welcome-text-wrapper">
-            <h1 class="welcome-title">I'm Chris Macabugao</h1>
-            <p class="welcome-tagline">Future Full-Stack Developer | Cloud & Cybersecurity Professional</p>
-            
-            <div class="social-icons">
-                <a href="https://facebook.com/profile.php?id=100080445008342" target="_blank"><i class="fab fa-facebook-f"></i></a>
-                <a href="https://linkedin.com/in/christopher-macabugao-3981a3148" target="_blank"><i class="fab fa-linkedin-in"></i></a>
-                <a href="https://x.com/macabucp" target="_blank"><i class="fab fa-x-twitter"></i></a>
-                <a href="https://instagram.com/mai_topak808" target="_blank"><i class="fab fa-instagram"></i></a>
-                <a href="https://gitlab.com/maccybersolutions" target="_blank"><i class="fab fa-gitlab"></i></a>
-            </div>
-            
-            <a href="#about" class="scroll-down">
-                <i class="fa-solid fa-arrow-down"></i> Discover More
-            </a>
-        </div>
+                <div class="container welcome-container">
+                    <div class="welcome-text-wrapper">
+                        <div class="hero-eyebrow"><span class="eyebrow-bracket">[</span> SYSTEM ONLINE <span class="eyebrow-bracket">]</span></div>
+                        <h1 class="welcome-title">I'm Chris Macabugao</h1>
+                        <p class="welcome-tagline">Future Full-Stack Developer | Cloud & Cybersecurity Professional</p>
 
-        <div class="welcome-image-wrapper">
-            <div class="portrait-frame">
-                <img src="photos/selfie.png" alt="BMW S1000RR">
-            </div>
-        </div>
+                        <div class="hero-sys-bar">
+                            <span class="hsb-item"><span class="status-pulse green"></span>SYS_ONLINE</span>
+                            <span class="hsb-sep">//</span>
+                            <span class="hsb-item"><span class="status-pulse amber"></span>THREAT:LOW</span>
+                            <span class="hsb-sep">//</span>
+                            <span class="hsb-item"><span class="status-pulse"></span>FIREWALL:ON</span>
+                        </div>
 
-    </div>
-</section>
+                        <div class="social-icons">
+                            <a href="https://facebook.com/profile.php?id=100080445008342" target="_blank" aria-label="Facebook"><i class="fab fa-facebook-f"></i></a>
+                            <a href="https://linkedin.com/in/christopher-macabugao-3981a3148" target="_blank" aria-label="LinkedIn"><i class="fab fa-linkedin-in"></i></a>
+                            <a href="https://x.com/macabucp" target="_blank" aria-label="X"><i class="fab fa-x-twitter"></i></a>
+                            <a href="https://instagram.com/mai_topak808" target="_blank" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
+                            <a href="https://gitlab.com/maccybersolutions" target="_blank" aria-label="GitLab"><i class="fab fa-gitlab"></i></a>
+                        </div>
 
+                        <a href="#about" class="scroll-down">
+                            <i class="fa-solid fa-arrow-down"></i> Discover More
+                        </a>
+                    </div>
+
+                    <div class="welcome-image-wrapper">
+                        <div class="hud-frame">
+                            <span class="hc hc-tl"></span>
+                            <span class="hc hc-tr"></span>
+                            <span class="hc hc-bl"></span>
+                            <span class="hc hc-br"></span>
+                            <div class="hud-scan-ring"></div>
+                            <div class="portrait-frame">
+                                <img src="photos/selfie.png" alt="Christopher Macabugao on BMW S1000RR">
+                            </div>
+                            <div class="hud-id-label">// ID: MACABUCP &nbsp;·&nbsp; AUTH: GRANTED //</div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- =============================== ABOUT ME SECTION =============================== -->
             <section id="about" class="about-section">
                 <div class="container about-container">
-                    <img src="photos/anela.jfif" alt="Anela" class="orbit-img pos-1">
-                    <img src="photos/bowser.jfif" alt="Bowser" class="orbit-img pos-2">
-                    <img src="photos/kids.jfif" alt="With wife and kids" class="orbit-img pos-3">
-                    <img src="photos/welcome.png" alt="Moto" class="orbit-img pos-4">
-                    <img src="photos/family.jfif" alt="Family" class="orbit-img pos-5">
-                    <img src="photos/family_foto.png" alt="foto" class="orbit-img pos-6">
-                    <img src="photos/us_airforce.png" alt="USAF" class="orbit-img pos-7">
-                    <img src="photos/navy.png" alt="Navy" class="orbit-img pos-8">
+                    <img src="photos/anela.jfif"     alt="Anela"     class="orbit-img pos-1">
+                    <img src="photos/bowser.jfif"    alt="Bowser"    class="orbit-img pos-2">
+                    <img src="photos/kids.jfif"      alt="With wife and kids" class="orbit-img pos-3">
+                    <img src="photos/welcome.png"    alt="Moto"      class="orbit-img pos-4">
+                    <img src="photos/family.jfif"    alt="Family"    class="orbit-img pos-5">
+                    <img src="photos/family_foto.png" alt="Family foto" class="orbit-img pos-6">
+                    <img src="photos/us_airforce.png" alt="US Air Force" class="orbit-img pos-7">
+                    <img src="photos/navy.png"       alt="US Navy"   class="orbit-img pos-8">
 
                     <div class="about-text">
+                        <div class="terminal-bar">
+                            <div class="terminal-dots"><span></span><span></span><span></span></div>
+                            <span class="terminal-cmd">root@macabucp:~$ cat <span class="cmd-hl">whoami.txt</span></span>
+                        </div>
+                        <div class="about-text-body">
                         <h2 class="section-title">About Me</h2>
                         <p>
                             Born and raised on the beautiful island of Saipan, I’m a passionate
@@ -100,18 +119,26 @@
                             friends and family. Life’s too short not to enjoy the ride—literally
                             and figuratively.
                         </p>
+                        </div><!-- /.about-text-body -->
                     </div>
                 </div>
             </section>
 
+            <!-- ================================ SKILLS SECTION ================================ -->
             <section id="skills" class="skills-section">
                 <div class="skills-bg">
                     <div class="container">
-                        
-                        <h2 class="section-title">What am I good at?</h2>
+                        <div class="skills-section-header">
+                            <p class="skills-section-label"><i class="fa-solid fa-terminal"></i> CAPABILITY_MATRIX.EXE</p>
+                            <h2 class="section-title">What am I good at?</h2>
+                        </div>
 
                         <div class="skill-row">
                             <div class="skill-text">
+                                <div class="skill-panel-bar">
+                                    <span class="spb-tag"><i class="fa-solid fa-server"></i> IT_CLOUD.MOD</span>
+                                    <span class="spb-status"><span class="status-pulse green"></span>ACTIVE</span>
+                                </div>
                                 <h3 class="skill-title">IT/Cloud Computing Services</h3>
                                 <p>
                                     I provide comprehensive IT services, including systems administration,
@@ -127,12 +154,14 @@
                                     growth.
                                 </p>
                             </div>
-                            
                             <div class="skill-image">
                                 <div class="card">
                                     <div class="card-inner">
                                         <div class="card-front">
-                                            <img src="photos/cybersecurity.jpg" alt="IT Services">
+                                            <img src="photos/cybersecurity.jpg" alt="IT & Cloud Services">
+                                            <div class="flip-indicator">
+                                                <i class="fa-solid fa-rotate"></i> 
+                                            </div>
                                         </div>
                                         <div class="card-back">
                                             <h3>Core Skills</h3>
@@ -142,7 +171,7 @@
                                                 <li>Cloud Migration</li>
                                                 <li>Virtualization</li>
                                                 <li>Kubernetes</li>
-                                                <li>DoD Doctrines</li>                                                
+                                                <li>DoD Doctrines</li>
                                             </ul>
                                         </div>
                                     </div>
@@ -152,6 +181,10 @@
 
                         <div class="skill-row reverse">
                             <div class="skill-text">
+                                <div class="skill-panel-bar">
+                                    <span class="spb-tag"><i class="fa-solid fa-shield-halved"></i> CYBER_SEC.MOD</span>
+                                    <span class="spb-status"><span class="status-pulse green"></span>ACTIVE</span>
+                                </div>
                                 <h3 class="skill-title">Cybersecurity Services</h3>
                                 <p>
                                     I deliver advanced cybersecurity services designed to protect your
@@ -166,12 +199,14 @@
                                     complex threat landscape.
                                 </p>
                             </div>
-
                             <div class="skill-image">
                                 <div class="card">
                                     <div class="card-inner">
                                         <div class="card-front">
-                                            <img src="photos/pentester.jpg" alt="Security">
+                                            <img src="photos/pentester.jpg" alt="Cybersecurity Services">
+                                            <div class="flip-indicator">
+                                                <i class="fa-solid fa-rotate"></i> 
+                                            </div>
                                         </div>
                                         <div class="card-back">
                                             <h3>Security Skills</h3>
@@ -192,125 +227,338 @@
                 </div>
             </section>
 
+            <!-- =============================== PROJECTS SECTION =============================== -->
             <section id="future-dev">
                 <div class="future-dev-container">
-                    
                     <h2 class="future-title">Current Projects</h2>
 
-                    <div class="projects-orbit">
+                    <div class="projects-mosaic">
 
-                        <div class="project-item warning-hub">
-                            <div class="warning-content">
-                                <p class="warning-text">
-                                    <span>Warning:</span><br>Future full stack dev loading...
-                                </p>
-                            </div>
-                        </div>
-
-                        <div class="project-item proj-1">
+                        <!-- ── WARNING / UPLIFT CARD ── -->
+                        <div class="mosaic-item tile-standard tile-warning-flip">
                             <div class="card">
                                 <div class="card-inner">
-                                    <div class="card-front">
-                                        <img src="photos/pc-building.png" alt="PC">
+                                    <div class="card-front warning-front">
+                                        <div class="warning-content">
+                                            <p><strong>Warning:</strong><br>Full-Stack Dev Loading...</p>
+                                        </div>
+                                        <div class="flip-indicator">
+                                            <i class="fa-solid fa-rotate"></i>
+                                        </div>
                                     </div>
                                     <div class="card-back">
-                                        <p class="project-description">Built a powerhouse AI rig.</p>
+                                        <div class="cb-wrap">
+                                            <div class="cb-icon icon-red"><i class="fa-solid fa-code"></i></div>
+                                            <h3 class="cb-title" style="color:#ff4757;">Uplift Code Camp</h3>
+                                            <span class="cb-status-badge badge-red">
+                                                <span class="status-pulse red"></span> In Progress
+                                            </span>
+                                            <div class="progress-wrapper">
+                                                <div class="progress-label">
+                                                    <span>Progress</span>
+                                                    <span>17%</span>
+                                                </div>
+                                                <div class="progress-track">
+                                                    <div class="bootcamp-progress-fill"></div>
+                                                </div>
+                                                <p class="bootcamp-progress-caption">1 of 6 Months Completed</p>
+                                            </div>
+                                            <div class="cb-tags">
+                                                <span class="cb-tag tag-cyan">JavaScript</span>
+                                                <span class="cb-tag tag-cyan">HTML</span>
+                                                <span class="cb-tag tag-cyan">CSS</span>
+                                            </div>
+                                        </div>
                                     </div>
                                 </div>
                             </div>
                         </div>
 
-                        <div class="project-item proj-2">
+                        <!-- ── MACSYS CARD (big 2×2) ── -->
+                        <div class="mosaic-item tile-big">
                             <div class="card">
                                 <div class="card-inner">
                                     <div class="card-front">
-                                        <img src="photos/cloud-computing.png" alt="Cloud">
+                                        <img src="photos/MACSys Logo.png" alt="MACSys LLC." class="macsys-card">
+                                        <div class="card-front-overlay">
+                                            <span class="cfo-label">MACSys LLC</span>
+                                            <span class="cfo-badge">
+                                                <span class="status-pulse green"></span> Active
+                                            </span>
+                                        </div>
+                                        <div class="flip-indicator">
+                                            <i class="fa-solid fa-rotate"></i>
+                                        </div>
                                     </div>
                                     <div class="card-back">
-                                        <p class="project-description">Cloud-powered Kubernetes empire.</p>
+                                        <div class="cb-wrap">
+                                            <div class="cb-icon icon-gold"><i class="fa-solid fa-medal"></i></div>
+                                            <h3 class="cb-title" style="color:#ffd700;">Modern Advanced<br>Computing Systems</h3>
+                                            <span class="cb-status-badge badge-gold">
+                                                <span class="status-pulse" style="background:#ffd700;"></span> Veteran-Minority Owned
+                                            </span>
+                                            <div class="cb-divider"></div>
+                                            <p class="cb-desc">
+                                                Born from Service. Driven by Innovation.<br><br>
+                                                Providing IT, Cybersecurity &amp; Software Development services to businesses of all sizes.
+                                            </p>
+                                            <div class="cb-tags">
+                                                <span class="cb-tag tag-gold">IT Services</span>
+                                                <span class="cb-tag tag-gold">Cybersecurity</span>
+                                                <span class="cb-tag tag-gold">Software Dev</span>
+                                                <span class="cb-tag tag-gold">Cloud</span>
+                                            </div>
+                                        </div>
                                     </div>
                                 </div>
                             </div>
                         </div>
 
-                        <div class="project-item proj-3">
+                        <!-- ── CLOUD ENVIRONMENT CARD (tall) ── -->
+                        <div class="mosaic-item tile-tall">
                             <div class="card">
                                 <div class="card-inner">
                                     <div class="card-front">
-                                        <img src="photos/micro-cloud-build.png" alt="Micro">
+                                        <img src="photos/cloud-computing.png" alt="Cloud Platform">
+                                        <div class="card-front-overlay">
+                                            <span class="cfo-label">Cloud Env</span>
+                                            <span class="cfo-badge">
+                                                <span class="status-pulse green"></span> Live
+                                            </span>
+                                        </div>
+                                        <div class="flip-indicator">
+                                            <i class="fa-solid fa-rotate"></i>
+                                        </div>
                                     </div>
                                     <div class="card-back">
-                                        <p class="project-description">Isolated micro-cloud fortress.</p>
+                                        <div class="cb-wrap">
+                                            <div class="cb-icon"><i class="fa-solid fa-cloud"></i></div>
+                                            <h3 class="cb-title">Cloud Environment</h3>
+                                            <span class="cb-status-badge">
+                                                <span class="status-pulse green"></span> Production
+                                            </span>
+                                            <div class="cb-divider"></div>
+                                            <p class="cb-desc">Secure, GitOps-driven, multi-region platform powering the full dev lifecycle at production-grade reliability.</p>
+                                            <div class="cb-tags">
+                                                <span class="cb-tag tag-cyan">GitOps</span>
+                                                <span class="cb-tag tag-cyan">Kubernetes</span>
+                                                <span class="cb-tag tag-cyan">Multi-Region</span>
+                                            </div>
+                                        </div>
                                     </div>
                                 </div>
                             </div>
                         </div>
 
-                        <div class="project-item proj-4">
+                        <!-- ── MICRO FORTRESS CARD ── -->
+                        <div class="mosaic-item tile-standard">
                             <div class="card">
                                 <div class="card-inner">
                                     <div class="card-front">
-                                        <img src="photos/cybersecurity-accreditation.png" alt="Cyber">
+                                        <img src="photos/micro-cloud-build.png" alt="Micro Fortress">
+                                        <div class="card-front-overlay">
+                                            <span class="cfo-label">Micro Fortress</span>
+                                            <span class="cfo-badge">
+                                                <span class="status-pulse green"></span> Online
+                                            </span>
+                                        </div>
+                                        <div class="flip-indicator">
+                                            <i class="fa-solid fa-rotate"></i>
+                                        </div>
                                     </div>
                                     <div class="card-back">
-                                        <p class="project-description">Security accreditation wizardry.</p>
+                                        <div class="cb-wrap">
+                                            <div class="cb-icon"><i class="fa-solid fa-server"></i></div>
+                                            <h3 class="cb-title">Micro Fortress</h3>
+                                            <span class="cb-status-badge">
+                                                <span class="status-pulse green"></span> Operational
+                                            </span>
+                                            <div class="cb-divider"></div>
+                                            <div style="display:flex;gap:14px;justify-content:center;">
+                                                <div class="cb-stat">
+                                                    <span class="cb-stat-num">8</span>
+                                                    <span class="cb-stat-label">PB</span>
+                                                </div>
+                                                <div class="cb-stat">
+                                                    <span class="cb-stat-num">768</span>
+                                                    <span class="cb-stat-label">Cores</span>
+                                                </div>
+                                                <div class="cb-stat">
+                                                    <span class="cb-stat-num">6</span>
+                                                    <span class="cb-stat-label">Nodes</span>
+                                                </div>
+                                            </div>
+                                            <div class="cb-tags" style="margin-top:6px;">
+                                                <span class="cb-tag tag-cyan">Air-Gap</span>
+                                                <span class="cb-tag tag-cyan">Big Data</span>
+                                                <span class="cb-tag tag-cyan">AI/ML</span>
+                                            </div>
+                                        </div>
                                     </div>
                                 </div>
                             </div>
                         </div>
 
-                        <div class="project-item proj-5">
+                        <!-- ── RMF WIZARD CARD (wide) ── -->
+                        <div class="mosaic-item tile-wide">
                             <div class="card">
                                 <div class="card-inner">
                                     <div class="card-front">
-                                        <img src="photos/securing-systems.png" alt="Secure">
+                                        <img src="photos/cybersecurity-accreditation.png" alt="RMF Wizard">
+                                        <div class="card-front-overlay">
+                                            <span class="cfo-label">RMF Wizard</span>
+                                            <span class="cfo-badge">
+                                                <span class="status-pulse amber"></span> Design
+                                            </span>
+                                        </div>
+                                        <div class="flip-indicator">
+                                            <i class="fa-solid fa-rotate"></i>
+                                        </div>
                                     </div>
                                     <div class="card-back">
-                                        <p class="project-description">Automation alchemy.</p>
+                                        <div class="cb-wrap">
+                                            <div class="cb-icon icon-amber"><i class="fa-solid fa-shield-halved"></i></div>
+                                            <h3 class="cb-title" style="color:#ffa502;">RMF Wizard</h3>
+                                            <a href="blog1.html" class="rmf-link"><i class="fa-solid fa-arrow-up-right-from-square"></i> Read the Blog</a>
+                                            <div class="progress-wrapper">
+                                                <div class="progress-label">
+                                                    <span>SDLC Progress</span>
+                                                    <span>30%</span>
+                                                </div>
+                                                <div class="progress-track">
+                                                    <div class="rmf-progress-fill"></div>
+                                                </div>
+                                            </div>
+                                            <div class="sdlc-stages">
+                                                <div class="sdlc-step done"></div>
+                                                <div class="sdlc-step done"></div>
+                                                <div class="sdlc-step active"></div>
+                                                <div class="sdlc-step"></div>
+                                                <div class="sdlc-step"></div>
+                                                <div class="sdlc-step"></div>
+                                            </div>
+                                            <p class="sdlc-label">Plan · Req · <strong style="color:#47b6e4;">Design</strong> · Build · Test · Deploy</p>
+                                            <div class="cb-tags">
+                                                <span class="cb-tag tag-cyan">DoD RMF</span>
+                                                <span class="cb-tag tag-cyan">ATO</span>
+                                                <span class="cb-tag tag-cyan">STIG</span>
+                                            </div>
+                                        </div>
                                     </div>
                                 </div>
                             </div>
                         </div>
 
-                        <div class="project-item proj-6">
+                        <!-- ── CYBER DASHBOARD CARD ── -->
+                        <div class="mosaic-item tile-standard">
                             <div class="card">
                                 <div class="card-inner">
                                     <div class="card-front">
-                                        <img src="photos/uplift.png" alt="Uplift">
+                                        <img src="photos/cyber-dashboard.png" alt="Cyber Dashboard">
+                                        <div class="card-front-overlay">
+                                            <span class="cfo-label">Cyber Dashboard</span>
+                                            <span class="cfo-badge">
+                                                <span class="status-pulse amber"></span> Design
+                                            </span>
+                                        </div>
+                                        <div class="flip-indicator">
+                                            <i class="fa-solid fa-rotate"></i>
+                                        </div>
                                     </div>
                                     <div class="card-back">
-                                        <p class="project-description">Full Stack quest in progress.</p>
+                                        <div class="cb-wrap">
+                                            <div class="cb-icon"><i class="fa-solid fa-chart-line"></i></div>
+                                            <h3 class="cb-title">Cyber Dashboard</h3>
+                                            <span class="cb-status-badge badge-amber">
+                                                <span class="status-pulse amber"></span> Design Phase
+                                            </span>
+                                            <div class="progress-wrapper">
+                                                <div class="progress-label">
+                                                    <span>Progress</span>
+                                                    <span>10%</span>
+                                                </div>
+                                                <div class="progress-track">
+                                                    <div class="dashboard-progress-fill"></div>
+                                                </div>
+                                            </div>
+                                            <p class="cb-desc">Real-time, all-in-one security monitoring platform.</p>
+                                            <div class="cb-tags">
+                                                <span class="cb-tag tag-cyan">SOC</span>
+                                                <span class="cb-tag tag-cyan">SIEM</span>
+                                                <span class="cb-tag tag-cyan">Alerts</span>
+                                            </div>
+                                        </div>
                                     </div>
                                 </div>
                             </div>
                         </div>
 
-                    </div> 
+                        <!-- ── MACTRACK CARD ── -->
+                        <div class="mosaic-item tile-standard tile-mactrack">
+                            <div class="card">
+                                <div class="card-inner">
+                                    <div class="card-front">
+                                        <img src="photos/mactrack.png" alt="MACTrack">
+                                        <div class="card-front-overlay">
+                                            <span class="cfo-label">MACTrack</span>
+                                            <span class="cfo-badge">
+                                                <span class="status-pulse green"></span> 90% Done
+                                            </span>
+                                        </div>
+                                        <div class="flip-indicator">
+                                            <i class="fa-solid fa-rotate"></i>
+                                        </div>
+                                    </div>
+                                    <div class="card-back">
+                                        <div class="cb-wrap">
+                                            <div class="cb-icon icon-green"><i class="fa-solid fa-boxes-stacked"></i></div>
+                                            <h3 class="cb-title" style="color:#2ed573;">MACTrack</h3>
+                                            <span class="cb-status-badge badge-green">
+                                                <span class="status-pulse green"></span> Near Complete
+                                            </span>
+                                            <div class="progress-wrapper">
+                                                <div class="progress-label">
+                                                    <span>Progress</span>
+                                                    <span>90%</span>
+                                                </div>
+                                                <div class="progress-track">
+                                                    <div class="mactrack-progress-fill"></div>
+                                                </div>
+                                                <p class="mactrack-progress-caption">Pending DB Integration</p>
+                                            </div>
+                                            <div class="cb-tags">
+                                                <span class="cb-tag tag-cyan">Asset Mgmt</span>
+                                                <span class="cb-tag tag-cyan">Inventory</span>
+                                                <span class="cb-tag tag-cyan">SQL</span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
                 </div>
             </section>
 
+            <!-- =============================== CONTACT SECTION =============================== -->
             <section id="contact" class="contact-section">
                 <div class="contact-container">
-                    <h2 class="contact-header">How's it? Hit Me Up!</h2>
-                    
-                    <div class="contact-social-icons">
-                        <a href="https://facebook.com/profile.php?id=100080445008342" target="_blank" aria-label="Facebook">
-                            <i class="fab fa-facebook-f"></i>
-                        </a>
-                        <a href="https://linkedin.com/in/christopher-macabugao-3981a3148" target="_blank" aria-label="LinkedIn">
-                            <i class="fab fa-linkedin-in"></i>
-                        </a>
-                        <a href="https://x.com/macabucp" target="_blank" aria-label="X">
-                            <i class="fab fa-x-twitter"></i>
-                        </a>
-                        <a href="https://instagram.com/mai_topak808" target="_blank" aria-label="Instagram">
-                            <i class="fab fa-instagram"></i>
-                        </a>
-                        <a href="https://gitlab.com/maccybersolutions" target="_blank" aria-label="Gitlab">
-                            <i class="fab fa-gitlab"></i>
-                        </a>
+                    <div class="terminal-bar">
+                        <div class="terminal-dots"><span></span><span></span><span></span></div>
+                        <span class="terminal-cmd">macabucp@portfolio:~$ <span class="cmd-hl">./send_message.sh</span> <span class="cmd-cursor"></span></span>
                     </div>
-                    
+                    <div class="contact-body">
+                    <h2 class="contact-header">How's it? Hit Me Up!</h2>
+
+                    <div class="contact-social-icons">
+                        <a href="https://facebook.com/profile.php?id=100080445008342" target="_blank" aria-label="Facebook"><i class="fab fa-facebook-f"></i></a>
+                        <a href="https://linkedin.com/in/christopher-macabugao-3981a3148" target="_blank" aria-label="LinkedIn"><i class="fab fa-linkedin-in"></i></a>
+                        <a href="https://x.com/macabucp" target="_blank" aria-label="X"><i class="fab fa-x-twitter"></i></a>
+                        <a href="https://instagram.com/mai_topak808" target="_blank" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
+                        <a href="https://gitlab.com/maccybersolutions" target="_blank" aria-label="GitLab"><i class="fab fa-gitlab"></i></a>
+                    </div>
+
                     <div class="contact-content">
                         <form action="mailto:chris-macabugao@maccyberpro.xyz" method="post" enctype="text/plain">
                             <div class="form-group">
@@ -331,54 +579,73 @@
                             </div>
                             <button type="submit"><i class="fa-regular fa-envelope"></i> Send</button>
                         </form>
-                        
+
                         <div class="contact-photo">
-                            <img src="photos/contact-photo.png" alt="Contact Photo">
+                            <img src="photos/contact-photo.png" alt="Christopher Macabugao - Contact">
                         </div>
                     </div>
+                    </div><!-- /.contact-body -->
                 </div>
             </section>
 
         </main>
 
+        <!-- =================================== FOOTER =================================== -->
         <footer class="site-footer">
+            <div class="footer-ticker" aria-hidden="true">
+                <div class="ticker-track">
+                    <span>CYBERSECURITY</span><span>//</span>
+                    <span>CLOUD ARCHITECTURE</span><span>//</span>
+                    <span>FULL-STACK DEVELOPMENT</span><span>//</span>
+                    <span>U.S. NAVY VETERAN</span><span>//</span>
+                    <span>KUBERNETES</span><span>//</span>
+                    <span>ZERO TRUST</span><span>//</span>
+                    <span>GITOPS</span><span>//</span>
+                    <span>THREAT ANALYSIS</span><span>//</span>
+                    <span>RMF / ATO</span><span>//</span>
+                    <span>INCIDENT RESPONSE</span><span>//</span>
+                    <span>SAIPAN PROUD</span><span>//</span>
+                    <!-- duplicate for seamless loop -->
+                    <span>CYBERSECURITY</span><span>//</span>
+                    <span>CLOUD ARCHITECTURE</span><span>//</span>
+                    <span>FULL-STACK DEVELOPMENT</span><span>//</span>
+                    <span>U.S. NAVY VETERAN</span><span>//</span>
+                    <span>KUBERNETES</span><span>//</span>
+                    <span>ZERO TRUST</span><span>//</span>
+                    <span>GITOPS</span><span>//</span>
+                    <span>THREAT ANALYSIS</span><span>//</span>
+                    <span>RMF / ATO</span><span>//</span>
+                    <span>INCIDENT RESPONSE</span><span>//</span>
+                    <span>SAIPAN PROUD</span><span>//</span>
+                </div>
+            </div>
             <div class="footer-inner">
                 <a href="#" class="back-to-top" aria-label="Back to top">
                     <i class="fa-solid fa-circle-up"></i>
                 </a>
-                
+
                 <h2 class="hello-title">
                     <a href="#">HELLO!</a>
                 </h2>
-                
+
                 <p class="my-name">
                     <span class="first-name">Christopher</span>
                     <span class="last-name">Macabugao</span>
                 </p>
 
                 <div class="social-icons footer-socials">
-                    <a href="https://facebook.com/profile.php?id=100080445008342" target="_blank" aria-label="Facebook">
-                        <i class="fab fa-facebook-f"></i>
-                    </a>
-                    <a href="https://linkedin.com/in/christopher-macabugao-3981a3148" target="_blank" aria-label="LinkedIn">
-                        <i class="fab fa-linkedin-in"></i>
-                    </a>
-                    <a href="https://x.com/macabucp" target="_blank" aria-label="X">
-                        <i class="fab fa-x-twitter"></i>
-                    </a>
-                    <a href="https://instagram.com/mai_topak808" target="_blank" aria-label="Instagram">
-                        <i class="fab fa-instagram"></i>
-                    </a>
-                    <a href="https://gitlab.com/maccybersolutions" target="_blank" aria-label="Gitlab">
-                        <i class="fab fa-gitlab"></i>
-                    </a>
+                    <a href="https://facebook.com/profile.php?id=100080445008342" target="_blank" aria-label="Facebook"><i class="fab fa-facebook-f"></i></a>
+                    <a href="https://linkedin.com/in/christopher-macabugao-3981a3148" target="_blank" aria-label="LinkedIn"><i class="fab fa-linkedin-in"></i></a>
+                    <a href="https://x.com/macabucp" target="_blank" aria-label="X"><i class="fab fa-x-twitter"></i></a>
+                    <a href="https://instagram.com/mai_topak808" target="_blank" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
+                    <a href="https://gitlab.com/maccybersolutions" target="_blank" aria-label="GitLab"><i class="fab fa-gitlab"></i></a>
                 </div>
-                
+
                 <p class="copyright">
                     &copy; 2025 Christopher Macabugao. All rights reserved.
                 </p>
             </div>
         </footer>
-
+        <script src="main.js" defer></script>
     </body>
 </html>

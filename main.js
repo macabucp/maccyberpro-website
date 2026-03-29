@@ -266,7 +266,7 @@ function initReveal() {
         { sel: '.skill-row.reverse',      dir: 'right' },
         { sel: '#skills .section-title',  dir: 'up' },
         { sel: '.future-title',           dir: 'up' },
-        { sel: '.orbit-item',             dir: 'up',   stagger: 75 },
+        { sel: '.orbit-stage',            dir: 'up' },
         { sel: '.contact-container',      dir: 'up' },
     ];
 

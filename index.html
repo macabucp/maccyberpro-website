@@ -232,10 +232,11 @@
                 <div class="future-dev-container">
                     <h2 class="future-title">Current Projects</h2>
 
-                    <div class="projects-mosaic">
+                    <div class="orbit-stage">
+                    <div class="orbit-track" id="orbitTrack">
 
                         <!-- ── WARNING / UPLIFT CARD ── -->
-                        <div class="mosaic-item tile-standard tile-warning-flip">
+                        <div class="orbit-item tile-warning-flip">
                             <div class="card">
                                 <div class="card-inner">
                                     <div class="card-front warning-front">
@@ -275,7 +276,7 @@
                         </div>
 
                         <!-- ── MACSYS CARD (big 2×2) ── -->
-                        <div class="mosaic-item tile-big">
+                        <div class="orbit-item tile-big">
                             <div class="card">
                                 <div class="card-inner">
                                     <div class="card-front">
@@ -315,7 +316,7 @@
                         </div>
 
                         <!-- ── CLOUD ENVIRONMENT CARD (tall) ── -->
-                        <div class="mosaic-item tile-tall">
+                        <div class="orbit-item">
                             <div class="card">
                                 <div class="card-inner">
                                     <div class="card-front">
@@ -351,7 +352,7 @@
                         </div>
 
                         <!-- ── MICRO FORTRESS CARD ── -->
-                        <div class="mosaic-item tile-standard">
+                        <div class="orbit-item">
                             <div class="card">
                                 <div class="card-inner">
                                     <div class="card-front">
@@ -400,7 +401,7 @@
                         </div>
 
                         <!-- ── RMF WIZARD CARD (wide) ── -->
-                        <div class="mosaic-item tile-wide">
+                        <div class="orbit-item">
                             <div class="card">
                                 <div class="card-inner">
                                     <div class="card-front">
@@ -450,7 +451,7 @@
                         </div>
 
                         <!-- ── CYBER DASHBOARD CARD ── -->
-                        <div class="mosaic-item tile-standard">
+                        <div class="orbit-item">
                             <div class="card">
                                 <div class="card-inner">
                                     <div class="card-front">
@@ -494,7 +495,7 @@
                         </div>
 
                         <!-- ── MACTRACK CARD ── -->
-                        <div class="mosaic-item tile-standard tile-mactrack">
+                        <div class="orbit-item tile-mactrack">
                             <div class="card">
                                 <div class="card-inner">
                                     <div class="card-front">
@@ -537,7 +538,10 @@
                             </div>
                         </div>
 
-                    </div>
+                    </div><!-- /.orbit-track -->
+                    <button class="orbit-btn orbit-prev" aria-label="Previous">&#8249;</button>
+                    <button class="orbit-btn orbit-next" aria-label="Next">&#8250;</button>
+                </div><!-- /.orbit-stage -->
                 </div>
             </section>
 
@@ -646,6 +650,6 @@
                 </p>
             </div>
         </footer>
-        <script src="/maccyberpro.xyz/main.js" defer></script>
+        <script src="main.js" defer></script>
     </body>
 </html>

@@ -252,7 +252,7 @@ function initReveal() {
     kill.textContent = `
         #about .about-container,
         #skills .skill-row, #skills .skill-row.reverse,
-        #future-dev .future-title, #future-dev .projects-mosaic,
+        #future-dev .future-title, #future-dev .orbit-stage,
         #contact .contact-container { animation: none !important; }
     `;
     document.head.append(kill);
@@ -266,7 +266,7 @@ function initReveal() {
         { sel: '.skill-row.reverse',      dir: 'right' },
         { sel: '#skills .section-title',  dir: 'up' },
         { sel: '.future-title',           dir: 'up' },
-        { sel: '.mosaic-item',            dir: 'up',   stagger: 75 },
+        { sel: '.orbit-item',             dir: 'up',   stagger: 75 },
         { sel: '.contact-container',      dir: 'up' },
     ];
 
@@ -317,7 +317,7 @@ function initActiveNav() {
 function initTilt() {
     if (isTouchOnly()) return;
 
-    $$('.mosaic-item .card, .skill-image .card').forEach(card => {
+    $$('.skill-image .card').forEach(card => {
         let raf;
 
         card.addEventListener('mousemove', e => {
@@ -483,6 +483,75 @@ function initProgressBars() {
 }
 
 /* ═══════════════════════════════════════════
+   17. ORBIT CAROUSEL  (projects section)
+═══════════════════════════════════════════ */
+function initOrbitCarousel() {
+    const track = $('#orbitTrack');
+    if (!track) return;
+
+    const items = $$('.orbit-item', track);
+    const N = items.length;
+    if (!N) return;
+
+    const ANGLE = 360 / N;
+    let current = 0;
+    let autoTimer;
+
+    function getRadius() {
+        return parseInt(getComputedStyle(track.parentElement).getPropertyValue('--orbit-r')) || 500;
+    }
+
+    function positionCards() {
+        const R = getRadius();
+        items.forEach((item, i) => {
+            item.style.transform = `rotateY(${i * ANGLE}deg) translateZ(${R}px)`;
+        });
+    }
+
+    function rotateTo(index) {
+        current = ((index % N) + N) % N;
+        track.style.transform = `rotateY(${-current * ANGLE}deg)`;
+        items.forEach((item, i) => item.classList.toggle('active', i === current));
+    }
+
+    function startAuto() {
+        autoTimer = setInterval(() => rotateTo(current + 1), 4000);
+    }
+
+    function stopAuto() {
+        clearInterval(autoTimer);
+    }
+
+    positionCards();
+    rotateTo(0);
+    startAuto();
+
+    window.addEventListener('resize', positionCards, { passive: true });
+
+    const prevBtn = $('.orbit-prev');
+    const nextBtn = $('.orbit-next');
+    if (prevBtn) prevBtn.addEventListener('click', () => { stopAuto(); rotateTo(current - 1); startAuto(); });
+    if (nextBtn) nextBtn.addEventListener('click', () => { stopAuto(); rotateTo(current + 1); startAuto(); });
+
+    // Click a non-active card to bring it to front
+    items.forEach((item, i) => {
+        item.addEventListener('click', e => {
+            if (i !== current) {
+                e.stopPropagation();
+                stopAuto();
+                rotateTo(i);
+                startAuto();
+            }
+        });
+    });
+
+    // Pause auto-rotate on hover
+    const stage = track.closest('.orbit-stage');
+    stage.addEventListener('mouseenter', stopAuto);
+    stage.addEventListener('mouseleave', startAuto);
+}
+
+/* ═══════════════════════════════════════════
    BOOT — init everything on DOM ready
 ═══════════════════════════════════════════ */
 document.addEventListener('DOMContentLoaded', () => {
@@ -501,5 +570,6 @@ document.addEventListener('DOMContentLoaded', () => {
     initMagnetic();
     initFormToast();
     initHeaderScroll();
+    initOrbitCarousel();
     // initProgressBars(); // currently triggered by CSS hover — enable if desired
 });

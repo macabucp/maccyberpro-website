@@ -652,9 +652,9 @@ body {
     border: 5px solid white;
 }
 
-.mosaic-item .card-front,
-.mosaic-item .card-back {
-    border-radius: 20px;
+.orbit-item .card-front,
+.orbit-item .card-back {
+    border-radius: 16px;
 }
 
 .skill-row.reverse {
@@ -715,6 +715,7 @@ body {
     background: #060d17;
     padding: 80px 20px;
     color: white;
+    overflow: hidden;
 }
 
 .future-dev-container {
@@ -732,23 +733,79 @@ body {
     animation: glowPulse 3s infinite alternate;
 }
 
-.projects-mosaic {
-    display: grid;
-    grid-template-columns: 1fr;
-    grid-auto-rows: 250px;
-    gap: 20px;
-}
-
-.mosaic-item {
-    width: 100%;
-    height: 100%;
+/* ── Orbit Stage ── */
+.orbit-stage {
+    --orbit-r: 500px;
     position: relative;
+    width: 100%;
+    height: 460px;
+    perspective: 1100px;
+    perspective-origin: 50% 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-top: 20px;
 }
 
-.mosaic-item .card {
-    width: 100%;
-    height: 100%;
+.orbit-track {
+    position: relative;
+    width: 260px;
+    height: 360px;
+    transform-style: preserve-3d;
+    transition: transform 0.9s cubic-bezier(0.45, 0.05, 0.55, 0.95);
 }
+
+.orbit-item {
+    position: absolute;
+    width: 260px;
+    height: 360px;
+    top: 0;
+    left: 0;
+    cursor: pointer;
+}
+
+.orbit-item .card {
+    width: 260px;
+    height: 360px;
+}
+
+/* Active (front) card: glow boost */
+.orbit-item.active .card-front,
+.orbit-item.active .card-back {
+    box-shadow: 0 0 32px rgba(71, 182, 228, 0.45), 0 20px 50px rgba(0, 0, 0, 0.5);
+}
+
+/* Nav buttons */
+.orbit-btn {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    background: rgba(71, 182, 228, 0.1);
+    border: 1px solid rgba(71, 182, 228, 0.35);
+    color: #47b6e4;
+    font-size: 2.4rem;
+    line-height: 1;
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    cursor: pointer;
+    z-index: 10;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: background 0.2s, border-color 0.2s, transform 0.2s;
+    user-select: none;
+    font-family: sans-serif;
+}
+
+.orbit-btn:hover {
+    background: rgba(71, 182, 228, 0.28);
+    border-color: rgba(71, 182, 228, 0.7);
+    transform: translateY(-50%) scale(1.12);
+}
+
+.orbit-prev { left: 16px; }
+.orbit-next { right: 16px; }
 
 .tile-warning-flip .warning-front {
     background: #333;
@@ -786,7 +843,7 @@ body {
 #future-dev .future-title {
     animation: fadeIn 1s ease-out 1.5s backwards;
 }
-#future-dev .projects-mosaic {
+#future-dev .orbit-stage {
     animation: slideUp 1s ease-out 1.7s backwards;
 }
 
@@ -864,14 +921,19 @@ body {
     to   { width: 30%; }
 }
 
-@media (min-width: 600px) {
-    .projects-mosaic {
-        grid-template-columns: repeat(2, 1fr);
-        grid-auto-rows: 250px;
+@media (max-width: 700px) {
+    .orbit-stage {
+        --orbit-r: 280px;
+        height: 380px;
     }
-
-    .tile-wide, .tile-big {
-        grid-column: span 2;
+    .orbit-item,
+    .orbit-item .card {
+        width: 220px;
+        height: 300px;
+    }
+    .orbit-track {
+        width: 220px;
+        height: 300px;
     }
 }
 
@@ -879,16 +941,10 @@ body {
     .future-title {
         font-size: 5rem;
     }
-
-    .projects-mosaic {
-        grid-template-columns: repeat(4, 1fr);
-        grid-auto-rows: 250px;
-        gap: 25px;
+    .orbit-stage {
+        --orbit-r: 550px;
+        height: 500px;
     }
-
-    .tile-big   { grid-column: span 2; grid-row: span 2; }
-    .tile-tall  { grid-column: span 1; grid-row: span 2; }
-    .tile-wide  { grid-column: span 2; grid-row: span 1; }
 }
 
 /* =================================== CONTACT SECTION =================================== */
@@ -1542,7 +1598,7 @@ button[type="submit"]:hover {
 }
 
 /* ── Project Card glow on hover ── */
-.mosaic-item .card:hover {
+.orbit-item .card:hover {
     filter: drop-shadow(0 0 12px rgba(71, 182, 228, 0.3));
 }
 
@@ -1888,9 +1944,9 @@ button[type="submit"]:hover {
     border-top: 3px solid rgba(46,213,115,0.6);
 }
 
-/* ── Mosaic card hover: colored glow per category ── */
-.tile-warning-flip .card:hover { filter: drop-shadow(0 0 14px rgba(255,71,87,0.5)); }
-.tile-big          .card:hover { filter: drop-shadow(0 0 14px rgba(255,215,0,0.35)); }
+/* ── Orbit card hover: colored glow per category ── */
+.orbit-item.tile-warning-flip .card:hover { filter: drop-shadow(0 0 14px rgba(255,71,87,0.5)); }
+.orbit-item.tile-big          .card:hover { filter: drop-shadow(0 0 14px rgba(255,215,0,0.35)); }
 
 /* =================================================================
    FULL CYBER / AI THEME REDESIGN

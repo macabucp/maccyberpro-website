@@ -734,11 +734,11 @@ body {
 
 /* ── Orbit Stage ── */
 .orbit-stage {
-    --orbit-r: 360px;
+    --orbit-r: 430px;
     position: relative;
     width: 100%;
-    height: 380px;
-    perspective: 1400px;
+    height: 460px;
+    perspective: 1600px;
     perspective-origin: 50% 50%;
     display: flex;
     align-items: center;
@@ -748,30 +748,94 @@ body {
 
 .orbit-track {
     position: relative;
-    width: 160px;
-    height: 220px;
+    width: 220px;
+    height: 290px;
     transform-style: preserve-3d;
     transition: transform 0.9s cubic-bezier(0.45, 0.05, 0.55, 0.95);
 }
 
 .orbit-item {
     position: absolute;
-    width: 160px;
-    height: 220px;
+    width: 220px;
+    height: 290px;
     top: 0;
     left: 0;
     cursor: pointer;
 }
 
 .orbit-item .card {
-    width: 160px;
-    height: 220px;
+    width: 220px;
+    height: 290px;
 }
 
 /* Active (front) card: glow boost */
 .orbit-item.active .card-front,
 .orbit-item.active .card-back {
     box-shadow: 0 0 32px rgba(71, 182, 228, 0.45), 0 20px 50px rgba(0, 0, 0, 0.5);
+}
+
+/* ── Orbit card back: compact layout to fit 220×290px ── */
+.orbit-item .cb-wrap {
+    gap: 4px;
+    padding: 12px 10px;
+}
+.orbit-item .cb-icon {
+    font-size: 1.4rem;
+    margin-bottom: 1px;
+}
+.orbit-item .cb-title {
+    font-size: 0.8rem;
+    line-height: 1.15;
+}
+.orbit-item .cb-status-badge {
+    font-size: 0.5rem;
+    padding: 1px 7px;
+}
+.orbit-item .cb-desc {
+    font-size: 0.66rem;
+    line-height: 1.35;
+}
+.orbit-item .progress-wrapper {
+    margin: 3px 0;
+    width: 100%;
+}
+.orbit-item .progress-label {
+    font-size: 0.58rem;
+    margin-bottom: 3px;
+}
+.orbit-item .progress-track {
+    height: 6px;
+}
+.orbit-item .cb-stat-num {
+    font-size: 1.1rem;
+}
+.orbit-item .cb-stat-label {
+    font-size: 0.55rem;
+}
+.orbit-item .sdlc-stages {
+    margin-top: 3px;
+}
+.orbit-item .sdlc-label {
+    font-size: 0.45rem;
+}
+.orbit-item .cb-tags {
+    margin-top: 3px;
+    gap: 3px;
+}
+.orbit-item .cb-tag {
+    font-size: 0.5rem;
+    padding: 1px 5px;
+}
+.orbit-item .rmf-link {
+    font-size: 0.6rem;
+}
+.orbit-item .bootcamp-progress-caption,
+.orbit-item .mactrack-progress-caption {
+    font-size: 0.55rem;
+    margin-top: 2px;
+}
+.orbit-item .cb-divider {
+    margin: 2px auto;
 }
 
 /* Nav buttons */
@@ -922,17 +986,17 @@ body {
 
 @media (max-width: 700px) {
     .orbit-stage {
-        --orbit-r: 240px;
-        height: 320px;
+        --orbit-r: 300px;
+        height: 380px;
     }
     .orbit-item,
     .orbit-item .card {
-        width: 130px;
-        height: 180px;
+        width: 180px;
+        height: 240px;
     }
     .orbit-track {
-        width: 130px;
-        height: 180px;
+        width: 180px;
+        height: 240px;
     }
 }
 
@@ -941,8 +1005,8 @@ body {
         font-size: 5rem;
     }
     .orbit-stage {
-        --orbit-r: 400px;
-        height: 420px;
+        --orbit-r: 500px;
+        height: 500px;
     }
 }
 

@@ -514,41 +514,25 @@ function initOrbitCarousel() {
         items.forEach((item, i) => item.classList.toggle('active', i === current));
     }
 
-    function startAuto() {
-        autoTimer = setInterval(() => rotateTo(current + 1), 4000);
-    }
-
-    function stopAuto() {
-        clearInterval(autoTimer);
-    }
-
     positionCards();
     rotateTo(0);
-    startAuto();
 
     window.addEventListener('resize', positionCards, { passive: true });
 
     const prevBtn = $('.orbit-prev');
     const nextBtn = $('.orbit-next');
-    if (prevBtn) prevBtn.addEventListener('click', () => { stopAuto(); rotateTo(current - 1); startAuto(); });
-    if (nextBtn) nextBtn.addEventListener('click', () => { stopAuto(); rotateTo(current + 1); startAuto(); });
+    if (prevBtn) prevBtn.addEventListener('click', () => rotateTo(current - 1));
+    if (nextBtn) nextBtn.addEventListener('click', () => rotateTo(current + 1));
 
     // Click a non-active card to bring it to front
     items.forEach((item, i) => {
         item.addEventListener('click', e => {
             if (i !== current) {
                 e.stopPropagation();
-                stopAuto();
                 rotateTo(i);
-                startAuto();
             }
         });
     });
-
-    // Pause auto-rotate on hover
-    const stage = track.closest('.orbit-stage');
-    stage.addEventListener('mouseenter', stopAuto);
-    stage.addEventListener('mouseleave', startAuto);
 }
 
 /* ═══════════════════════════════════════════

@@ -652,11 +652,6 @@ body {
     border: 5px solid white;
 }
 
-.orbit-item .card-front,
-.orbit-item .card-back {
-    border-radius: 16px;
-}
-
 .skill-row.reverse {
     direction: ltr;
 }
@@ -726,196 +721,73 @@ body {
     font-family: 'Permanent Marker', cursive;
     font-size: 3rem;
     color: #47b6e4;
-    margin-bottom: 40px;
+    margin-bottom: 8px;
     text-align: center;
     text-shadow: 0 0 20px rgba(71, 182, 228, 0.4);
     animation: glowPulse 3s infinite alternate;
 }
 
-/* ── Orbit Stage ── */
-.orbit-stage {
-    --orbit-r: 430px;
-    position: relative;
-    width: 100%;
-    height: 460px;
-    perspective: 1600px;
-    perspective-origin: 50% 50%;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    margin-top: 20px;
-}
-
-.orbit-track {
-    position: relative;
-    width: 220px;
-    height: 290px;
-    transform-style: preserve-3d;
-    transition: transform 0.9s cubic-bezier(0.45, 0.05, 0.55, 0.95);
-}
-
-.orbit-item {
-    position: absolute;
-    width: 220px;
-    height: 290px;
-    top: 0;
-    left: 0;
-    cursor: pointer;
-}
-
-.orbit-item .card {
-    width: 220px;
-    height: 290px;
-}
-
-/* Active (front) card: glow boost */
-.orbit-item.active .card-front,
-.orbit-item.active .card-back {
-    box-shadow: 0 0 32px rgba(71, 182, 228, 0.45), 0 20px 50px rgba(0, 0, 0, 0.5);
-}
-
-/* ── Orbit card back: compact layout to fit 220×290px ── */
-.orbit-item .cb-wrap {
-    gap: 4px;
-    padding: 12px 10px;
-}
-.orbit-item .cb-icon {
-    font-size: 1.4rem;
-    margin-bottom: 1px;
-}
-.orbit-item .cb-title {
-    font-size: 0.8rem;
-    line-height: 1.15;
-}
-.orbit-item .cb-status-badge {
-    font-size: 0.5rem;
-    padding: 1px 7px;
-}
-.orbit-item .cb-desc {
-    font-size: 0.66rem;
-    line-height: 1.35;
-}
-.orbit-item .progress-wrapper {
-    margin: 3px 0;
-    width: 100%;
-}
-.orbit-item .progress-label {
-    font-size: 0.58rem;
-    margin-bottom: 3px;
-}
-.orbit-item .progress-track {
-    height: 6px;
-}
-.orbit-item .cb-stat-num {
-    font-size: 1.1rem;
-}
-.orbit-item .cb-stat-label {
-    font-size: 0.55rem;
-}
-.orbit-item .sdlc-stages {
-    margin-top: 3px;
-}
-.orbit-item .sdlc-label {
-    font-size: 0.45rem;
-}
-.orbit-item .cb-tags {
-    margin-top: 3px;
-    gap: 3px;
-}
-.orbit-item .cb-tag {
-    font-size: 0.5rem;
-    padding: 1px 5px;
-}
-.orbit-item .rmf-link {
-    font-size: 0.6rem;
-}
-.orbit-item .bootcamp-progress-caption,
-.orbit-item .mactrack-progress-caption {
-    font-size: 0.55rem;
-    margin-top: 2px;
-}
-.orbit-item .cb-divider {
-    margin: 2px auto;
-}
-
-/* Nav buttons */
-.orbit-btn {
-    position: absolute;
-    top: 50%;
-    transform: translateY(-50%);
-    background: rgba(71, 182, 228, 0.1);
-    border: 1px solid rgba(71, 182, 228, 0.35);
-    color: #47b6e4;
-    font-size: 2.4rem;
-    line-height: 1;
-    width: 50px;
-    height: 50px;
-    border-radius: 50%;
-    cursor: pointer;
-    z-index: 10;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    transition: background 0.2s, border-color 0.2s, transform 0.2s;
-    user-select: none;
-    font-family: sans-serif;
-}
-
-.orbit-btn:hover {
-    background: rgba(71, 182, 228, 0.28);
-    border-color: rgba(71, 182, 228, 0.7);
-    transform: translateY(-50%) scale(1.12);
-}
-
-.orbit-prev { left: 16px; }
-.orbit-next { right: 16px; }
-
-.tile-warning-flip .warning-front {
-    background: #333;
-    border: 3px solid #ff4757;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
+.projects-section-header {
     text-align: center;
-    padding: 10px;
+    margin-bottom: 36px;
 }
 
-.warning-front p {
-    color: white;
-    font-size: 1.1rem;
-    line-height: 1.4;
+.projects-label {
+    font-family: 'Courier New', monospace;
+    font-size: 0.65rem;
+    letter-spacing: 4px;
+    color: rgba(71, 182, 228, 0.5);
+    text-transform: uppercase;
+    margin-bottom: 6px;
 }
 
-.warning-front strong {
-    font-family: 'Permanent Marker', cursive;
-    font-size: 2rem;
-    background: linear-gradient(90deg, #ff4757, #ff6b6b);
-    -webkit-background-clip: text;
-    background-clip: text;
-    -webkit-text-fill-color: transparent;
-    display: block;
-    animation: pulseGlow 1s infinite alternate;
+/* ── Bento Grid ── */
+.bento-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    grid-template-rows: 260px 260px 260px 140px;
+    gap: 16px;
+    width: 100%;
 }
 
-.tile-warning-flip .card-back {
-    background: #1a2d3a;
-    border-color: #ff4757;
+.bento-cell {
+    position: relative;
+    border-radius: 16px;
 }
 
-#future-dev .future-title {
-    animation: fadeIn 1s ease-out 1.5s backwards;
-}
-#future-dev .orbit-stage {
-    animation: slideUp 1s ease-out 1.7s backwards;
-}
-
-#contact .contact-container {
-    animation: slideUp 1s ease-out 2s backwards;
+.bento-cell .card {
+    width: 100%;
+    height: 100%;
+    border-radius: 16px;
 }
 
-/* ==================== PROGRESS BARS ==================== */
+.bento-cell .card-front,
+.bento-cell .card-back {
+    border-radius: 16px;
+}
 
+/* ── Explicit grid placement ── */
+.bento-macsys   { grid-column: 1 / 3; grid-row: 1 / 3; }
+.bento-cloud    { grid-column: 3;     grid-row: 1; }
+.bento-micro    { grid-column: 3;     grid-row: 2; }
+.bento-rmf      { grid-column: 1;     grid-row: 3; }
+.bento-dash     { grid-column: 2;     grid-row: 3; }
+.bento-mactrack { grid-column: 3;     grid-row: 3; }
+.bento-uplift   { grid-column: 1 / -1; grid-row: 4; }
+
+/* ── Card theming per project ── */
+.bento-macsys .card-front  { background: #0d1a24; overflow: hidden; }
+.bento-macsys .card-back   { background: #1a2d3a; border-top: 3px solid rgba(255,215,0,0.6); }
+.bento-mactrack .card-back { border-top: 3px solid rgba(46,213,115,0.6); }
+
+/* MACSys logo: contain so full logo is visible */
+.bento-macsys .card-front img {
+    object-fit: contain;
+    padding: 20px;
+    background: #0d1a24;
+}
+
+/* ── Progress Bars ── */
 .progress-wrapper {
     width: 100%;
     margin: 10px 0;
@@ -958,55 +830,85 @@ body {
 .card:hover .bootcamp-progress-fill  { animation: bootcamp-load 1.5s ease-out forwards 0.3s; }
 .card:hover .mactrack-progress-fill  { animation: mactrack-load 1.5s ease-out forwards 0.3s; }
 .card:hover .dashboard-progress-fill { animation: dashboard-load 1.5s ease-out forwards 0.3s; }
-.card:hover .rmf-progress-fill       { animation: rmf-load 1.5s ease-out forwards 0.3s; }
-
-.tile-big .card-front { background: #0d1a24; }
-.tile-big .card-back  { background: #1a2d3a; }
-
-
-
-/* ==================== RMF LOADING BAR ==================== */
-
-.rmf-progress-fill {
-    height: 100%;
-    background: linear-gradient(90deg, #00d2d3, #47b6e4);
-    border-radius: 10px;
-    width: 0%;
-    box-shadow: 0 0 10px rgba(71, 182, 228, 0.7);
-}
-
-.card:hover .rmf-progress-fill {
-    animation: rmf-loadBar 1.5s ease-out forwards 0.3s;
-}
+.card:hover .rmf-progress-fill       { animation: rmf-loadBar 1.5s ease-out forwards 0.3s; }
 
 @keyframes rmf-loadBar {
     from { width: 0%; }
     to   { width: 30%; }
 }
 
-@media (max-width: 700px) {
-    .orbit-stage {
-        --orbit-r: 300px;
-        height: 380px;
-    }
-    .orbit-item,
-    .orbit-item .card {
-        width: 180px;
-        height: 240px;
-    }
-    .orbit-track {
-        width: 180px;
-        height: 240px;
-    }
+/* ── Card hover glow per category ── */
+.bento-cell .card:hover     { filter: drop-shadow(0 0 12px rgba(71,182,228,0.3)); }
+.bento-macsys .card:hover   { filter: drop-shadow(0 0 14px rgba(255,215,0,0.35)); }
+.bento-uplift .card:hover   { filter: drop-shadow(0 0 14px rgba(255,71,87,0.5)); }
+.bento-mactrack .card:hover { filter: drop-shadow(0 0 14px rgba(46,213,115,0.35)); }
+
+/* ── Entrance animations ── */
+#future-dev .future-title {
+    animation: fadeIn 1s ease-out 1.5s backwards;
+}
+#future-dev .bento-grid {
+    animation: slideUp 1s ease-out 1.7s backwards;
 }
 
+#contact .contact-container {
+    animation: slideUp 1s ease-out 2s backwards;
+}
+
+/* ── Responsive: mobile ── */
+@media (max-width: 600px) {
+    .bento-grid {
+        grid-template-columns: 1fr;
+        grid-template-rows: auto;
+        gap: 12px;
+    }
+    .bento-macsys, .bento-cloud, .bento-micro, .bento-rmf,
+    .bento-dash, .bento-mactrack, .bento-uplift {
+        grid-column: auto;
+        grid-row: auto;
+    }
+    .bento-cell .card    { height: 240px; }
+    .bento-macsys .card  { height: 300px; }
+    .bento-uplift .card  { height: 200px; }
+    .bento-uplift .cb-wrap {
+        flex-direction: column;
+        align-items: center;
+        padding: 16px;
+    }
+    .uplift-content            { align-items: center; text-align: center; }
+    .uplift-content .cb-title  { text-align: center; }
+    .uplift-content .cb-tags   { justify-content: center; }
+    .bento-uplift .progress-wrapper { max-width: 100%; }
+}
+
+/* ── Responsive: tablet ── */
+@media (min-width: 601px) and (max-width: 1023px) {
+    .bento-grid {
+        grid-template-columns: repeat(2, 1fr);
+        grid-template-rows: auto;
+        gap: 14px;
+    }
+    .bento-macsys, .bento-cloud, .bento-micro, .bento-rmf,
+    .bento-dash, .bento-mactrack, .bento-uplift {
+        grid-column: auto;
+        grid-row: auto;
+    }
+    .bento-macsys   { grid-column: span 2; }
+    .bento-mactrack { grid-column: span 2; }
+    .bento-uplift   { grid-column: span 2; }
+    .bento-cell .card    { height: 240px; }
+    .bento-macsys .card  { height: 300px; }
+    .bento-uplift .card  { height: 160px; }
+}
+
+/* ── Responsive: large desktop ── */
 @media (min-width: 1024px) {
     .future-title {
         font-size: 5rem;
     }
-    .orbit-stage {
-        --orbit-r: 500px;
-        height: 500px;
+    .bento-grid {
+        grid-template-rows: 280px 280px 280px 150px;
+        gap: 18px;
     }
 }
 
@@ -1660,10 +1562,7 @@ button[type="submit"]:hover {
     }
 }
 
-/* ── Project Card glow on hover ── */
-.orbit-item .card:hover {
-    filter: drop-shadow(0 0 12px rgba(71, 182, 228, 0.3));
-}
+/* ── Project Card glow on hover — handled per-cell in projects section ── */
 
 /* ── Hero section: slight gradient overlay for contrast ── */
 .welcome-section::before {
@@ -1869,14 +1768,20 @@ button[type="submit"]:hover {
 .cb-tag.tag-red   { color: #ff4757; border-color: rgba(255,71,87,0.3);  background: rgba(255,71,87,0.08);  }
 .cb-tag.tag-gold  { color: #ffd700; border-color: rgba(255,215,0,0.3);  background: rgba(255,215,0,0.08);  }
 
-/* ── Warning card: animated pulsing border ── */
-.tile-warning-flip .card-front.warning-front {
-    border-width: 2px;
+/* ── Uplift warning card: animated pulsing border ── */
+.bento-uplift .card-front {
+    background: #1a1010;
+    border: 2px solid rgba(255,71,87,0.4) !important;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    padding: 20px;
     animation: warnBorder 2s ease-in-out infinite;
     overflow: hidden;
 }
 
-.tile-warning-flip .card-front.warning-front::before {
+.bento-uplift .card-front::before {
     content: '';
     position: absolute;
     inset: 0;
@@ -1892,6 +1797,52 @@ button[type="submit"]:hover {
     animation: stripeShift 4s linear infinite;
 }
 
+.bento-uplift .card-front .warning-content {
+    position: relative;
+    z-index: 1;
+}
+
+.bento-uplift .card-front p {
+    color: white;
+    font-size: 1rem;
+    line-height: 1.4;
+}
+
+.bento-uplift .card-front strong {
+    font-family: 'Permanent Marker', cursive;
+    font-size: 1.8rem;
+    background: linear-gradient(90deg, #ff4757, #ff6b6b);
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+    display: block;
+    animation: pulseGlow 1s infinite alternate;
+}
+
+.bento-uplift .card-back { border-color: #ff4757; }
+
+/* Uplift back: horizontal layout for short card height */
+.bento-uplift .cb-wrap {
+    flex-direction: row;
+    align-items: center;
+    gap: 20px;
+    padding: 14px 28px;
+    justify-content: flex-start;
+}
+
+.uplift-content {
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+    flex: 1;
+    align-items: flex-start;
+    text-align: left;
+}
+
+.uplift-content .cb-title { text-align: left; }
+.uplift-content .cb-tags  { justify-content: flex-start; }
+.bento-uplift .progress-wrapper { max-width: 280px; }
+
 @keyframes stripeShift {
     from { background-position: 0 0; }
     to   { background-position: 72px 0; }
@@ -1903,11 +1854,7 @@ button[type="submit"]:hover {
 }
 
 /* ── MACSys card: gold shimmer on front ── */
-.tile-big .card-front {
-    overflow: hidden;
-}
-
-.tile-big .card-front::after {
+.bento-macsys .card-front::after {
     content: '';
     position: absolute;
     top: -50%;
@@ -1928,11 +1875,6 @@ button[type="submit"]:hover {
 @keyframes shimmer {
     0%   { left: -75%; }
     60%, 100% { left: 130%; }
-}
-
-/* ── MACSys card-back: gold accent line ── */
-.tile-big .card-back {
-    border-top: 3px solid rgba(255, 215, 0, 0.6);
 }
 
 /* Highlight stat numbers in project cards */
@@ -2002,14 +1944,7 @@ button[type="submit"]:hover {
     margin-top: 3px;
 }
 
-/* ── MACTrack: almost-complete glow ── */
-.tile-mactrack .card-back {
-    border-top: 3px solid rgba(46,213,115,0.6);
-}
-
-/* ── Orbit card hover: colored glow per category ── */
-.orbit-item.tile-warning-flip .card:hover { filter: drop-shadow(0 0 14px rgba(255,71,87,0.5)); }
-.orbit-item.tile-big          .card:hover { filter: drop-shadow(0 0 14px rgba(255,215,0,0.35)); }
+/* ── MACTrack / Uplift / MACSys hover glows handled in projects section ── */
 
 /* =================================================================
    FULL CYBER / AI THEME REDESIGN
@@ -2465,18 +2400,6 @@ header, main, footer, section { position: relative; z-index: 1; }
 ═══════════════════════════════════ */
 .future-title {
     font-size: 3rem;
-}
-
-/* Decorative sub-label under future-title */
-#future-dev .future-dev-container::before {
-    content: '// ACTIVE_OPERATIONS.LOG';
-    display: block;
-    font-family: 'Courier New', monospace;
-    font-size: 0.62rem;
-    letter-spacing: 4px;
-    color: rgba(71,182,228,0.35);
-    text-align: center;
-    margin-bottom: 6px;
 }
 
 /* ═══════════════════════════════════

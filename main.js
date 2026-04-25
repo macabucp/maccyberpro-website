@@ -252,7 +252,7 @@ function initReveal() {
     kill.textContent = `
         #about .about-container,
         #skills .skill-row, #skills .skill-row.reverse,
-        #future-dev .future-title, #future-dev .orbit-stage,
+        #future-dev .future-title, #future-dev .bento-grid,
         #contact .contact-container { animation: none !important; }
     `;
     document.head.append(kill);
@@ -266,7 +266,7 @@ function initReveal() {
         { sel: '.skill-row.reverse',      dir: 'right' },
         { sel: '#skills .section-title',  dir: 'up' },
         { sel: '.future-title',           dir: 'up' },
-        { sel: '.orbit-stage',            dir: 'up' },
+        { sel: '.bento-grid',             dir: 'up' },
         { sel: '.contact-container',      dir: 'up' },
     ];
 
@@ -554,6 +554,5 @@ document.addEventListener('DOMContentLoaded', () => {
     initMagnetic();
     initFormToast();
     initHeaderScroll();
-    initOrbitCarousel();
     // initProgressBars(); // currently triggered by CSS hover — enable if desired
 });

@@ -2867,3 +2867,296 @@ button[type="submit"]:hover {
         padding: 100px 15px 30px;
     }
 }
+
+/* ===================================
+   SITE PAGES — nav, homepage strip, inner pages
+   =================================== */
+main {
+    flex: 1;
+}
+
+@media (min-width: 835px) {
+    .nav-list {
+        align-items: center;
+    }
+}
+
+.nav-list a.nav-reviews,
+.nav-list a.nav-reviews.nav-active {
+    color: #041018;
+    background: #47b6e4;
+    border-radius: 999px;
+    padding: 8px 16px !important;
+    box-shadow: 0 0 18px rgba(71, 182, 228, 0.45);
+}
+
+.nav-list a.nav-reviews::before,
+.nav-list a.nav-reviews.nav-active::before,
+.nav-list a.nav-reviews::after,
+.nav-list a.nav-reviews.nav-active::after {
+    content: none;
+}
+
+.nav-list a.nav-reviews:hover,
+.nav-list a.nav-reviews:focus-visible {
+    color: #fff;
+    background: #ff4757;
+    box-shadow: 0 0 18px rgba(255, 71, 87, 0.45);
+}
+
+.latest-reviews {
+    padding: 36px 20px 28px;
+    background:
+        radial-gradient(ellipse at 50% 0%, rgba(71, 182, 228, 0.12), transparent 58%),
+        #060d17;
+}
+
+.latest-reviews-inner,
+.home-teasers-grid {
+    width: min(1200px, 100%);
+    margin: 0 auto;
+}
+
+.latest-reviews-head {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: flex-end;
+    justify-content: space-between;
+    gap: 16px 24px;
+    margin-bottom: 22px;
+}
+
+.latest-reviews-title {
+    font-family: 'Permanent Marker', cursive;
+    font-size: clamp(2.2rem, 5vw, 3.5rem);
+    font-weight: 400;
+    color: #47b6e4;
+    line-height: 1.1;
+    text-shadow: 0 0 20px rgba(71, 182, 228, 0.4);
+}
+
+.latest-reviews-all {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    padding: 12px 22px;
+    border-radius: 999px;
+    background: #47b6e4;
+    color: #041018;
+    font-family: 'Courier New', monospace;
+    font-weight: 700;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    text-decoration: none;
+    box-shadow: 0 0 22px rgba(71, 182, 228, 0.35);
+}
+
+.latest-reviews-all:hover,
+.latest-reviews-all:focus-visible {
+    background: #ff4757;
+    color: #fff;
+}
+
+.latest-reviews-grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 18px;
+}
+
+.latest-review-card {
+    display: flex;
+    flex-direction: column;
+    min-height: 100%;
+    text-decoration: none;
+    color: inherit;
+    background: #0a1628;
+    border: 1px solid rgba(71, 182, 228, 0.22);
+    border-radius: 14px;
+    overflow: hidden;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.28);
+    transition: border-color 0.2s ease, transform 0.2s ease;
+}
+
+.latest-review-card:hover,
+.latest-review-card:focus-visible {
+    border-color: #47b6e4;
+    transform: translateY(-3px);
+}
+
+.latest-review-thumb {
+    width: 100%;
+    aspect-ratio: 16 / 10;
+    object-fit: cover;
+    background: #07111c;
+    display: block;
+}
+
+.latest-review-thumb-empty {
+    display: grid;
+    place-items: center;
+    color: rgba(200, 230, 245, 0.45);
+    font-family: 'Courier New', monospace;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    font-size: 0.72rem;
+}
+
+.latest-review-body {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    padding: 16px 16px 18px;
+}
+
+.latest-review-title {
+    font-family: 'Quicksand', sans-serif;
+    font-size: 1.15rem;
+    line-height: 1.35;
+    font-weight: 700;
+    color: #fff;
+}
+
+.latest-review-summary {
+    color: #c8e6f5;
+    font-size: 0.95rem;
+    line-height: 1.55;
+}
+
+.latest-review-rating {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    color: #ffa502;
+    font-family: 'Courier New', monospace;
+    font-size: 0.78rem;
+}
+
+.latest-reviews .stars {
+    display: inline-flex;
+    gap: 3px;
+    color: #ffa502;
+}
+
+.latest-reviews-empty {
+    margin: 8px 0 18px;
+    padding: 22px;
+    border: 1px dashed rgba(71, 182, 228, 0.22);
+    border-radius: 12px;
+    color: #c8e6f5;
+    background: rgba(10, 22, 40, 0.65);
+}
+
+.latest-reviews-disclosure {
+    margin-top: 22px;
+}
+
+.home-teasers {
+    padding: 12px 20px 80px;
+    background: #060d17;
+}
+
+.home-teasers-grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 16px;
+}
+
+.home-teaser {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    min-height: 100%;
+    padding: 22px;
+    text-decoration: none;
+    color: #c8e6f5;
+    background: rgba(10, 22, 40, 0.92);
+    border: 1px solid rgba(71, 182, 228, 0.22);
+    border-radius: 14px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.28);
+    transition: border-color 0.2s ease, transform 0.2s ease;
+}
+
+.home-teaser:hover,
+.home-teaser:focus-visible {
+    border-color: #47b6e4;
+    transform: translateY(-3px);
+}
+
+.home-teaser h2 {
+    font-family: 'Permanent Marker', cursive;
+    font-size: clamp(1.8rem, 4vw, 2.4rem);
+    font-weight: 400;
+    color: #fff;
+    letter-spacing: 1px;
+}
+
+.home-teaser p:last-of-type {
+    line-height: 1.6;
+}
+
+.home-teaser-go {
+    margin-top: auto;
+    color: #47b6e4;
+    font-family: 'Courier New', monospace;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    font-size: 0.72rem;
+}
+
+.about-resume {
+    margin-top: 18px;
+}
+
+.about-resume a {
+    color: #00eeff;
+    font-family: 'Courier New', monospace;
+    font-weight: 700;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    text-decoration: none;
+}
+
+.about-resume a:hover,
+.about-resume a:focus-visible {
+    color: #fff;
+}
+
+.inner-page .about-section,
+.inner-page #future-dev,
+.inner-page .contact-section {
+    padding-top: 150px;
+}
+
+@media (min-width: 1000px) {
+    .latest-reviews-grid,
+    .home-teasers-grid {
+        grid-template-columns: repeat(3, minmax(0, 1fr));
+    }
+}
+
+@media (min-width: 835px) {
+    .inner-page .about-section,
+    .inner-page #future-dev,
+    .inner-page .contact-section {
+        padding-top: 210px;
+    }
+}
+
+@media (max-width: 450px) {
+    .inner-page .about-section,
+    .inner-page #future-dev,
+    .inner-page .contact-section {
+        padding-top: 120px;
+    }
+
+    .latest-reviews,
+    .home-teasers {
+        padding-left: 15px;
+        padding-right: 15px;
+    }
+
+    .latest-reviews-all,
+    .nav-list a.nav-reviews {
+        letter-spacing: 0.04em;
+    }
+}

@@ -78,6 +78,12 @@ Every review page prints: "As an Amazon Associate I earn from qualifying purchas
 
 Published reviews get a page title, meta description, Open Graph tags, Product/Review JSON-LD, a sitemap entry, and an RSS item. The feed is `reviews/feed.xml`. The sitemap is `sitemap.xml`.
 
+## Homepage
+
+The home page shows the three newest published reviews, using the same order as the reviews index: newest `date` first, then slug. Drafts are left out.
+
+`scripts/build-reviews.js` rewrites the block between `<!-- LATEST_REVIEWS:START -->` and `<!-- LATEST_REVIEWS:END -->` in `index.html`. Do not edit that block by hand. Both deploy workflows run the script, so publishing a review updates the strip without a separate homepage edit. A local build rewrites that block in `index.html`; deploy regenerates it either way.
+
 ## Deploy
 
 The live domain `maccyberpro.click` is served by GitHub Pages, not by the Azure Static Web Apps workflow. Pages publishes whatever is on `main`, and the generated review HTML is gitignored, so the site would 404 at `/reviews/` if those files were not built during deploy.

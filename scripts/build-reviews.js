@@ -3,7 +3,7 @@
  * Build the product-review pages from reviews/posts/*.md.
  *
  * Usage:
- *   node scripts/build-reviews.js            # write pages, sitemap, and RSS
+ *   node scripts/build-reviews.js            # write pages, sitemap, RSS, and the homepage strip
  *   node scripts/build-reviews.js --self-test
  *
  * No dependencies. Safe to run on every deploy.
@@ -424,9 +424,86 @@ function socialHtml() {
         .join('\n');
 }
 
+function siteNav(depth) {
+    const root = '../'.repeat(depth);
+    const reviewsHref = depth === 0 ? 'reviews/index.html' : depth === 1 ? 'index.html' : '../index.html';
+    const items = [
+        ['home', `${depth === 0 ? 'index.html' : `${root}index.html`}`, 'Home'],
+        ['reviews', reviewsHref, 'Reviews'],
+        ['about', `${root}about.html`, 'About'],
+        ['contact', `${root}contact.html`, 'Contact'],
+    ];
+    return items
+        .map(([id, href, label]) => {
+            const classes = [];
+            if (id === 'reviews') classes.push('nav-reviews');
+            if (id === 'reviews') classes.push('nav-active');
+            const classAttr = classes.length ? ` class="${classes.join(' ')}"` : '';
+            const current = id === 'reviews' ? ' aria-current="page"' : '';
+            return `<li><a href="${href}"${classAttr}${current}>${label}</a></li>`;
+        })
+        .join('\n                ');
+}
+
+function homeImageSrc(image) {
+    if (!image) return '';
+    if (/^https?:\/\//i.test(image)) return image;
+    return `reviews/${image.replace(/^\//, '')}`;
+}
+
+function homeCardHtml(post) {
+    const thumb = post.image
+        ? `<img class="latest-review-thumb" src="${escapeHtml(homeImageSrc(post.image))}" alt="${escapeHtml(post.productName)}" loading="lazy">`
+        : '<div class="latest-review-thumb latest-review-thumb-empty" role="img" aria-label="No photo yet">No photo yet</div>';
+    return `                <a class="latest-review-card" href="reviews/${post.slug}.html">
+                    ${thumb}
+                    <span class="latest-review-body">
+                        <span class="latest-review-title">${escapeHtml(post.title)}</span>
+                        <span class="latest-review-rating">${starsHtml(post.rating)} <span>${escapeHtml(formatRating(post.rating))}/5</span></span>
+                        <span class="latest-review-summary">${escapeHtml(post.summary)}</span>
+                    </span>
+                </a>`;
+}
+
+const LATEST_START = '<!-- LATEST_REVIEWS:START -->';
+const LATEST_END = '<!-- LATEST_REVIEWS:END -->';
+
+function renderHomeLatest(posts) {
+    const latest = publishedPosts(posts).slice(0, 3);
+    const cards = latest.length
+        ? `<div class="latest-reviews-grid">\n${latest.map(homeCardHtml).join('\n')}\n                </div>`
+        : '<p class="latest-reviews-empty">No published reviews yet.</p>';
+
+    return `            <section id="latest-reviews" class="latest-reviews" aria-labelledby="latest-reviews-heading">
+                <div class="latest-reviews-inner">
+                    <div class="latest-reviews-head">
+                        <div>
+                            <p class="projects-label"><i class="fa-solid fa-terminal" aria-hidden="true"></i> LATEST_REVIEWS.LOG</p>
+                            <h2 id="latest-reviews-heading" class="latest-reviews-title">Latest Reviews</h2>
+                        </div>
+                        <a class="latest-reviews-all" href="reviews/index.html">See all reviews</a>
+                    </div>
+                    ${cards}
+                    <p class="affiliate-disclosure latest-reviews-disclosure">${escapeHtml(DISCLOSURE)}</p>
+                </div>
+            </section>`;
+}
+
+function injectHomeLatest(posts) {
+    const indexPath = path.join(ROOT, 'index.html');
+    const html = fs.readFileSync(indexPath, 'utf8');
+    const start = html.indexOf(LATEST_START);
+    const end = html.indexOf(LATEST_END);
+    if (start === -1 || end === -1 || end < start) {
+        throw new Error('index.html is missing LATEST_REVIEWS markers.');
+    }
+    const replacement = `${LATEST_START}\n${renderHomeLatest(posts)}\n        ${LATEST_END}`;
+    const next = html.slice(0, start) + replacement + html.slice(end + LATEST_END.length);
+    if (next !== html) fs.writeFileSync(indexPath, next);
+}
+
 function chrome({ depth, title, description, canonical, robots, ogType, image, published, jsonLd, body }) {
     const root = '../'.repeat(depth);
-    const reviewsHref = depth === 1 ? 'index.html' : '../index.html';
     const imageMeta = image
         ? `<meta property="og:image" content="${escapeHtml(image)}">\n        <meta name="twitter:image" content="${escapeHtml(image)}">`
         : '';
@@ -476,13 +553,7 @@ function chrome({ depth, title, description, canonical, robots, ogType, image, p
         </label>
         <nav class="main-nav">
             <ul class="nav-list">
-                <li><a href="${root}index.html#about">About Me</a></li>
-                <li><a href="${root}index.html#skills">Skills</a></li>
-                <li><a href="${root}index.html#future-dev">Current Projects</a></li>
-                <li><a href="${root}index.html#contact">Contact</a></li>
-                <li><a href="${root}blog1.html">Blog</a></li>
-                <li><a href="${reviewsHref}" class="nav-active" aria-current="page">Reviews</a></li>
-                <li><a href="${root}myResume.html" target="_blank" rel="noopener noreferrer">My Resume</a></li>
+                ${siteNav(depth)}
             </ul>
         </nav>
         <h1 class="hello-title">
@@ -729,6 +800,8 @@ function renderPost(post) {
 function renderSitemap(posts) {
     const urls = [
         { loc: `${SITE_ORIGIN}/`, lastmod: '' },
+        { loc: `${SITE_ORIGIN}/about.html`, lastmod: '' },
+        { loc: `${SITE_ORIGIN}/contact.html`, lastmod: '' },
         { loc: `${SITE_ORIGIN}/blog1.html`, lastmod: '' },
         { loc: `${SITE_ORIGIN}/myResume.html`, lastmod: '' },
         { loc: `${SITE_ORIGIN}/reviews/`, lastmod: '' },
@@ -800,6 +873,7 @@ function writeFile(filePath, contents) {
 function build() {
     const posts = loadPosts();
     cleanGenerated();
+    injectHomeLatest(posts);
     writeFile(path.join(REVIEWS_DIR, 'index.html'), renderListing(posts));
     writeFile(path.join(REVIEWS_DIR, 'feed.xml'), renderFeed(posts));
     writeFile(path.join(ROOT, 'sitemap.xml'), renderSitemap(posts));
@@ -815,11 +889,76 @@ function build() {
     console.log(`Built ${published} published review(s) and ${drafts} draft(s).`);
 }
 
+function headerHtml(html) {
+    const start = html.indexOf('<header');
+    const end = html.indexOf('</header>');
+    assert(start !== -1 && end > start, 'Page is missing a header.');
+    return html.slice(start, end);
+}
+
+function assertSharedNav(html, label) {
+    const header = headerHtml(html);
+    assert(/\bnav-reviews\b/.test(header), `${label} is missing the Reviews accent link.`);
+    assert(header.includes('>Home</a>'), `${label} is missing Home.`);
+    assert(header.includes('>Reviews</a>'), `${label} is missing Reviews.`);
+    assert(header.includes('>About</a>'), `${label} is missing About.`);
+    assert(header.includes('>Contact</a>'), `${label} is missing Contact.`);
+    assert(!header.includes('>Projects</a>') && !header.includes('projects.html'), `${label} nav still includes Projects.`);
+    assert(!/href="[^"]*#(?:about|skills|future-dev|contact)"/.test(header), `${label} nav still points at a removed section.`);
+    assert(!header.includes('blog1.html') && !header.includes('myResume.html'), `${label} nav should be Home, Reviews, About, and Contact.`);
+}
+
+function verifySharedNav() {
+    ['index.html', 'about.html', 'contact.html', 'blog1.html', 'myResume.html'].forEach((file) => {
+        const html = fs.readFileSync(path.join(ROOT, file), 'utf8');
+        assertSharedNav(html, file);
+        assert(!html.includes('projects.html'), `${file} still links to Projects.`);
+        assert(!/href="[^"]*#(?:about|skills|future-dev|contact)"/.test(html), `${file} still links to a removed section.`);
+    });
+}
+
+function verifyHomeLatest(posts) {
+    const html = fs.readFileSync(path.join(ROOT, 'index.html'), 'utf8');
+    const start = html.indexOf(LATEST_START);
+    const end = html.indexOf(LATEST_END);
+    assert(start !== -1 && end > start, 'index.html is missing the latest-reviews markers.');
+    const block = html.slice(start, end);
+    assert(block.includes('id="latest-reviews"'), 'Homepage strip is missing #latest-reviews.');
+    assert(block.includes('>See all reviews</a>'), 'Homepage strip is missing the See all reviews link.');
+    assert(block.includes('href="reviews/index.html"'), 'See all reviews should point at the reviews index.');
+    assert(block.includes(DISCLOSURE), 'Homepage strip is missing the Amazon disclosure.');
+
+    const latest = publishedPosts(posts).slice(0, 3);
+    let cursor = -1;
+    latest.forEach((post) => {
+        const href = `href="reviews/${post.slug}.html"`;
+        const at = block.indexOf(href);
+        assert(at > cursor, `${post.slug} is missing or out of order on the homepage strip.`);
+        cursor = at;
+        assert(block.includes(escapeHtml(post.title)), `${post.slug} title is missing from the homepage strip.`);
+        assert(block.includes(escapeHtml(post.summary)), `${post.slug} summary is missing from the homepage strip.`);
+        assert(block.includes('out of 5 stars'), `${post.slug} star rating is missing from the homepage strip.`);
+    });
+    publishedPosts(posts).slice(3).forEach((post) => {
+        assert(!block.includes(`reviews/${post.slug}.html`), `${post.slug} should not be on the homepage strip.`);
+    });
+    draftPosts(posts).forEach((post) => {
+        assert(!block.includes(post.slug), 'Drafts must stay off the homepage strip.');
+    });
+}
+
 function verifyOutput(posts) {
     const listing = fs.readFileSync(path.join(REVIEWS_DIR, 'index.html'), 'utf8');
     const sitemap = fs.readFileSync(path.join(ROOT, 'sitemap.xml'), 'utf8');
     const feed = fs.readFileSync(path.join(REVIEWS_DIR, 'feed.xml'), 'utf8');
     assert(listing.includes(DISCLOSURE), 'Listing page is missing the Amazon disclosure.');
+    assertSharedNav(listing, 'reviews/index.html');
+    verifySharedNav();
+    verifyHomeLatest(posts);
+    ['about.html', 'contact.html'].forEach((page) => {
+        assert(sitemap.includes(`${SITE_ORIGIN}/${page}`), `${page} is missing from the sitemap.`);
+    });
+    assert(!sitemap.includes(`${SITE_ORIGIN}/projects.html`), 'Removed Projects page is still in the sitemap.');
 
     let cursor = -1;
     publishedPosts(posts).forEach((post) => {
@@ -831,6 +970,7 @@ function verifyOutput(posts) {
     posts.forEach((post) => {
         const file = path.join(post.draft ? DRAFTS_DIR : REVIEWS_DIR, `${post.slug}.html`);
         const html = fs.readFileSync(file, 'utf8');
+        assertSharedNav(html, post.slug);
         assert(html.includes(DISCLOSURE), `${post.slug} is missing the Amazon disclosure.`);
         assert(html.includes('rel="sponsored nofollow noopener"'), `${post.slug} affiliate link is missing rel.`);
         assert(html.includes('target="_blank"'), `${post.slug} affiliate link must open in a new tab.`);
@@ -888,6 +1028,14 @@ function selfTest() {
     assert(page.includes(DISCLOSURE), 'Self-test missed disclosure.');
     assert(page.includes('"@type":"Review"') && page.includes('"@type":"Product"'), 'Self-test missed JSON-LD.');
     assert(page.includes('<meta property="og:title"'), 'Self-test missed Open Graph.');
+    assertSharedNav(page, 'review self-test');
+    assert(page.includes('href="../about.html"'), 'Review About link should be its own page.');
+    assert(!page.includes('projects.html'), 'Review nav should not include Projects.');
+    assert(page.includes('href="index.html" class="nav-reviews nav-active"'), 'Reviews link should stay highlighted.');
+
+    const draftNav = renderPost({ ...older, draft: true, slug: 'draft-thing' });
+    assert(draftNav.includes('href="../../about.html"'), 'Draft nav should climb two levels.');
+    assert(draftNav.includes('href="../index.html" class="nav-reviews nav-active"'), 'Draft Reviews link is wrong.');
 
     const bodyLink = markdownToHtml(older.body);
     assert(bodyLink.includes('rel="sponsored nofollow noopener"'), 'Amazon links in the write-up need the sponsored rel.');
@@ -900,6 +1048,19 @@ function selfTest() {
     const newerAt = listing.indexOf('Newer published review');
     const olderAt = listing.indexOf('Older published review');
     assert(newerAt !== -1 && olderAt !== -1 && newerAt < olderAt, 'Listing should be newest-first.');
+
+    const middle = { ...older, slug: 'middle-thing', title: 'Middle published review', date: '2026-03-03', summary: 'Middle summary.', image: 'images/mic.jpg' };
+    const ancient = { ...older, slug: 'ancient-thing', title: 'Ancient published review', date: '2025-01-01', summary: 'Ancient summary.' };
+    const draftPost = { ...older, slug: 'draft-thing', title: 'Draft review', date: '2026-06-06', draft: true, summary: 'Draft summary.' };
+    const home = renderHomeLatest([older, newer, middle, ancient, draftPost]);
+    assert(home.indexOf('reviews/newer-thing.html') < home.indexOf('reviews/middle-thing.html'), 'Homepage should list the newest review first.');
+    assert(home.indexOf('reviews/middle-thing.html') < home.indexOf('reviews/older-thing.html'), 'Homepage should keep date order.');
+    assert(!home.includes('ancient-thing'), 'Homepage strip should show only the three newest reviews.');
+    assert(!home.includes('draft-thing'), 'Homepage strip should skip drafts.');
+    assert(home.includes('src="reviews/images/mic.jpg"'), 'Homepage image path should be relative to the site root.');
+    assert(home.includes('>See all reviews</a>'), 'Homepage strip needs the see-all link.');
+    assert(home.includes('out of 5 stars'), 'Homepage strip needs star ratings.');
+    assert(home.includes(DISCLOSURE), 'Homepage strip needs the Amazon disclosure.');
 
     console.log('Review build self-test passed.');
 }
@@ -918,5 +1079,6 @@ module.exports = {
     markdownToHtml,
     renderPost,
     renderListing,
+    renderHomeLatest,
     DISCLOSURE,
 };

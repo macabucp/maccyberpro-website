@@ -294,6 +294,18 @@ function initReveal() {
 /* ═══════════════════════════════════════════
    7. ACTIVE NAV SECTION TRACKING
 ═══════════════════════════════════════════ */
+function initLegacySectionLinks() {
+    const moved = {
+        about: '/about.html',
+        skills: '/about.html#skills',
+        'future-dev': '/about.html',
+        contact: '/contact.html',
+    };
+    const id = (location.hash || '').replace(/^#/, '');
+    if (!moved[id] || document.getElementById(id)) return;
+    location.replace(moved[id]);
+}
+
 function initActiveNav() {
     const sections = $$('section[id]');
     const links    = $$('.nav-list a[href^="#"]');
@@ -539,6 +551,7 @@ function initOrbitCarousel() {
    BOOT — init everything on DOM ready
 ═══════════════════════════════════════════ */
 document.addEventListener('DOMContentLoaded', () => {
+    initLegacySectionLinks();
     initCursor();
     initParticles();
     initTypewriter();

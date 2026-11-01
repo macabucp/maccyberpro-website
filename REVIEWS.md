@@ -80,9 +80,10 @@ Published reviews get a page title, meta description, Open Graph tags, Product/R
 
 ## Deploy
 
-The site is static HTML, CSS, and JavaScript. GitHub Actions (`.github/workflows/azure-static-web-apps-salmon-bush-0ac9d9c10.yml`) deploys it to Azure Static Web Apps.
+The live domain `maccyberpro.click` is served by GitHub Pages, not by the Azure Static Web Apps workflow. Pages publishes whatever is on `main`, and the generated review HTML is gitignored, so the site would 404 at `/reviews/` if those files were not built during deploy.
 
-- A push to `main` runs the review build, then uploads the site to production. The custom domain in `CNAME` is `maccyberpro.click`.
-- A pull request builds a preview. Closing the pull request removes that preview.
+`.github/workflows/pages.yml` is what publishes the live site. On every push to `main`, and when someone runs it manually (`workflow_dispatch`), it checks out the repo, sets up Node, runs `node scripts/build-reviews.js`, and deploys the whole site with `actions/configure-pages`, `actions/upload-pages-artifact` (`path: .`), and `actions/deploy-pages`. The `CNAME` file is part of that upload, so the custom domain stays attached. `.github` is left out of the Pages artifact; that does not affect the site.
 
-Azure does not run a framework build (`skip_app_build: true`). The workflow runs `node scripts/build-reviews.js` first, which is why adding the Markdown file is enough.
+GitHub Pages will not run this workflow until the repository Pages source is set to **GitHub Actions** (Settings → Pages → Build and deployment → Source). This repo does not change that setting by itself.
+
+The Azure workflow (`.github/workflows/azure-static-web-apps-salmon-bush-0ac9d9c10.yml`) is unchanged and is not what serves `maccyberpro.click`.

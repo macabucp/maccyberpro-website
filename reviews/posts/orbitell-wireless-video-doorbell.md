@@ -6,6 +6,7 @@ summary: "A no-fuss wireless video doorbell that works as intended, with no door
 rating: 5
 productName: "Orbitell Wireless Video Doorbell"
 brand: "Orbitell"
+image: "images/orbitell-doorbell.jpg"
 verdict: "A no-fuss wireless video doorbell that works as intended, which is exactly what you want at your front door."
 pros:
   - "Works reliably, as advertised"

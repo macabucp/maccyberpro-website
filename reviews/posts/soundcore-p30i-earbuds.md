@@ -6,6 +6,7 @@ summary: "Affordable noise-canceling earbuds with strong sound, a comfortable fi
 rating: 5
 productName: "Soundcore P30i Noise Canceling Earbuds"
 brand: "Soundcore"
+image: "images/soundcore-p30i.jpg"
 verdict: "Affordable noise-canceling earbuds that meet every need I have. Easy to recommend."
 pros:
   - "Strong sound for the price"

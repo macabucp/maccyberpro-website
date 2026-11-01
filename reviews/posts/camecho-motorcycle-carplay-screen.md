@@ -6,6 +6,7 @@ summary: "An easy-to-install CarPlay screen with a built-in dash cam that just w
 rating: 5
 productName: "CAMECHO Motorcycle CarPlay Screen with Dash Cam"
 brand: "CAMECHO"
+image: "images/camecho-carplay-screen.jpg"
 verdict: "A simple, reliable way to add CarPlay and a dash cam to your bike. Only gripe is the short wiring."
 pros:
   - "Easy to install"

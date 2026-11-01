@@ -298,7 +298,7 @@ function initLegacySectionLinks() {
     const moved = {
         about: '/about.html',
         skills: '/about.html#skills',
-        'future-dev': '/projects.html',
+        'future-dev': '/about.html',
         contact: '/contact.html',
     };
     const id = (location.hash || '').replace(/^#/, '');

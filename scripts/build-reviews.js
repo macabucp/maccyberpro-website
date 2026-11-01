@@ -431,7 +431,6 @@ function siteNav(depth) {
         ['home', `${depth === 0 ? 'index.html' : `${root}index.html`}`, 'Home'],
         ['reviews', reviewsHref, 'Reviews'],
         ['about', `${root}about.html`, 'About'],
-        ['projects', `${root}projects.html`, 'Projects'],
         ['contact', `${root}contact.html`, 'Contact'],
     ];
     return items
@@ -802,7 +801,6 @@ function renderSitemap(posts) {
     const urls = [
         { loc: `${SITE_ORIGIN}/`, lastmod: '' },
         { loc: `${SITE_ORIGIN}/about.html`, lastmod: '' },
-        { loc: `${SITE_ORIGIN}/projects.html`, lastmod: '' },
         { loc: `${SITE_ORIGIN}/contact.html`, lastmod: '' },
         { loc: `${SITE_ORIGIN}/blog1.html`, lastmod: '' },
         { loc: `${SITE_ORIGIN}/myResume.html`, lastmod: '' },
@@ -904,16 +902,17 @@ function assertSharedNav(html, label) {
     assert(header.includes('>Home</a>'), `${label} is missing Home.`);
     assert(header.includes('>Reviews</a>'), `${label} is missing Reviews.`);
     assert(header.includes('>About</a>'), `${label} is missing About.`);
-    assert(header.includes('>Projects</a>'), `${label} is missing Projects.`);
     assert(header.includes('>Contact</a>'), `${label} is missing Contact.`);
+    assert(!header.includes('>Projects</a>') && !header.includes('projects.html'), `${label} nav still includes Projects.`);
     assert(!/href="[^"]*#(?:about|skills|future-dev|contact)"/.test(header), `${label} nav still points at a removed section.`);
-    assert(!header.includes('blog1.html') && !header.includes('myResume.html'), `${label} nav should be Home, Reviews, About, Projects, and Contact.`);
+    assert(!header.includes('blog1.html') && !header.includes('myResume.html'), `${label} nav should be Home, Reviews, About, and Contact.`);
 }
 
 function verifySharedNav() {
-    ['index.html', 'about.html', 'projects.html', 'contact.html', 'blog1.html', 'myResume.html'].forEach((file) => {
+    ['index.html', 'about.html', 'contact.html', 'blog1.html', 'myResume.html'].forEach((file) => {
         const html = fs.readFileSync(path.join(ROOT, file), 'utf8');
         assertSharedNav(html, file);
+        assert(!html.includes('projects.html'), `${file} still links to Projects.`);
         assert(!/href="[^"]*#(?:about|skills|future-dev|contact)"/.test(html), `${file} still links to a removed section.`);
     });
 }
@@ -956,9 +955,10 @@ function verifyOutput(posts) {
     assertSharedNav(listing, 'reviews/index.html');
     verifySharedNav();
     verifyHomeLatest(posts);
-    ['about.html', 'projects.html', 'contact.html'].forEach((page) => {
+    ['about.html', 'contact.html'].forEach((page) => {
         assert(sitemap.includes(`${SITE_ORIGIN}/${page}`), `${page} is missing from the sitemap.`);
     });
+    assert(!sitemap.includes(`${SITE_ORIGIN}/projects.html`), 'Removed Projects page is still in the sitemap.');
 
     let cursor = -1;
     publishedPosts(posts).forEach((post) => {
@@ -1030,6 +1030,7 @@ function selfTest() {
     assert(page.includes('<meta property="og:title"'), 'Self-test missed Open Graph.');
     assertSharedNav(page, 'review self-test');
     assert(page.includes('href="../about.html"'), 'Review About link should be its own page.');
+    assert(!page.includes('projects.html'), 'Review nav should not include Projects.');
     assert(page.includes('href="index.html" class="nav-reviews nav-active"'), 'Reviews link should stay highlighted.');
 
     const draftNav = renderPost({ ...older, draft: true, slug: 'draft-thing' });

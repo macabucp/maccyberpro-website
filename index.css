@@ -3105,6 +3105,10 @@ main {
 
 .about-resume {
     margin-top: 18px;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 8px 22px;
 }
 
 .about-resume a {
@@ -3128,9 +3132,12 @@ main {
 }
 
 @media (min-width: 1000px) {
-    .latest-reviews-grid,
-    .home-teasers-grid {
+    .latest-reviews-grid {
         grid-template-columns: repeat(3, minmax(0, 1fr));
+    }
+
+    .home-teasers-grid {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
     }
 }
 

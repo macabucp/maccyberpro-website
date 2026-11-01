@@ -6,6 +6,7 @@ summary: "A solid, compact walking treadmill with auto incline, but the deck is 
 rating: 3
 productName: "Advzon 3.5 HP Auto Incline Treadmill"
 brand: "Advzon"
+image: "images/advzon-treadmill.jpg"
 verdict: "Solid walking treadmill for the price. If you want to jog, get a bigger deck."
 pros:
   - "Works well for daily walking"
@@ -22,6 +23,8 @@ draft: false
 I bought the Advzon treadmill in March 2026 to get more walking in at home. After months of use, it does that job just fine. It runs smoothly at walking speeds, and the incline gives you an easy way to make a workout harder.
 
 Where it falls short is size. When I tried to pick up the pace and jog, the deck felt too short and narrow to stride comfortably, and that's when I stopped trusting it for runs. Even walking, my arms still bump the side rails now and then. That's annoying when you're trying to just zone out and put in the miles.
+
+![The Advzon treadmill folded up for storage](images/advzon-treadmill-folded.jpg)
 
 ## Who it's for
 

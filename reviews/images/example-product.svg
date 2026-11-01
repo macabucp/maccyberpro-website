@@ -1,0 +1,7 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="800" height="500" viewBox="0 0 800 500" role="img" aria-label="Example product photo placeholder">
+  <rect width="800" height="500" fill="#07111c"/>
+  <rect x="18" y="18" width="764" height="464" fill="none" stroke="#47b6e4" stroke-width="2"/>
+  <text x="400" y="220" text-anchor="middle" fill="#00eeff" font-family="Courier New, monospace" font-size="28" letter-spacing="6">EXAMPLE</text>
+  <text x="400" y="268" text-anchor="middle" fill="#c8e6f5" font-family="Courier New, monospace" font-size="20">Product photo placeholder</text>
+  <text x="400" y="308" text-anchor="middle" fill="#7f9aab" font-family="Courier New, monospace" font-size="14">Replace image in front matter</text>
+</svg>

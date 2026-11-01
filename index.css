@@ -102,7 +102,7 @@ body {
 }
 
 .hamburger-checkbox:checked ~ .main-nav {
-    max-height: 500px;
+    max-height: 720px;
 }
 
 .nav-list {
@@ -160,7 +160,11 @@ body {
 
     .nav-list {
         flex-direction: row;
-        gap: 60px;
+        flex-wrap: wrap;
+        justify-content: center;
+        column-gap: 22px;
+        row-gap: 2px;
+        padding: 0 12px;
     }
 
     .nav-list a {
@@ -191,6 +195,12 @@ body {
     
     .hello-title a {
         font-size: 5rem;
+    }
+}
+
+@media (min-width: 1200px) {
+    .nav-list {
+        column-gap: 42px;
     }
 }
 
@@ -1127,6 +1137,17 @@ button[type="submit"]:hover {
     margin-top: 30px;
     margin-bottom: 30px;
     justify-content: center;
+}
+
+.affiliate-disclosure {
+    font-family: 'Courier New', monospace;
+    font-size: 0.72rem;
+    line-height: 1.55;
+    letter-spacing: 0.2px;
+    color: rgba(200, 230, 245, 0.72);
+    max-width: 40rem;
+    margin: 12px auto 0;
+    padding: 0 16px;
 }
 
 .copyright {

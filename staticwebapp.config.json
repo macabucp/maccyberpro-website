@@ -1,0 +1,10 @@
+{
+  "routes": [
+    {
+      "route": "/reviews/drafts/*",
+      "headers": {
+        "X-Robots-Tag": "noindex, nofollow"
+      }
+    }
+  ]
+}

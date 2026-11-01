@@ -6,6 +6,7 @@ summary: "A sharp-looking carbon fiber helmet with a comfortable fit and an easy
 rating: 5
 productName: "Woljay Carbon Fiber Motorcycle Helmet"
 brand: "Woljay"
+image: "images/woljay-helmet.jpg"
 verdict: "Looks sharp, fits well, and takes a Sena intercom easily. A great value carbon fiber lid."
 pros:
   - "Great-looking carbon fiber finish"
@@ -19,7 +20,11 @@ draft: false
 
 I bought the Woljay carbon fiber helmet in May 2025, and it's been my go-to lid ever since. First, it looks great. The carbon fiber finish gets noticed and looks more expensive than it was. Second, it fits great. It's snug where it should be and comfortable on longer rides.
 
+![Front view of my Woljay carbon fiber helmet with the dark visor](images/woljay-helmet-front.jpg)
+
 I also added a Sena intercom, and the install was easy. There's room for the speakers and mount, so I didn't have to fight the helmet to get everything seated.
+
+![My Woljay helmet with a Sena intercom mounted on the side](images/woljay-helmet-sena.jpg)
 
 ## Who it's for
 

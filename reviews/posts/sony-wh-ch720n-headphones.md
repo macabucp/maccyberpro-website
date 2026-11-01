@@ -6,6 +6,7 @@ summary: "Lightweight, comfortable noise-canceling headphones with clear sound t
 rating: 5
 productName: "Sony WH-CH720N Wireless Noise Canceling Headphones"
 brand: "Sony"
+image: "images/sony-wh-ch720n.jpg"
 verdict: "A lightweight, comfortable noise-canceling pair that does everything I need at a price that's hard to beat."
 pros:
   - "Clear, balanced sound"

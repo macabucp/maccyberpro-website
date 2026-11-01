@@ -22,7 +22,9 @@ const DRAFTS_DIR = path.join(REVIEWS_DIR, 'drafts');
 const SITE_ORIGIN = 'https://www.maccyberpro.click';
 const SITE_NAME = 'Christopher Macabugao';
 const DEFAULT_AUTHOR = 'Christopher Macabugao';
+const ASSOCIATE_TAG = 'maccyberpro-20';
 const DISCLOSURE = 'As an Amazon Associate I earn from qualifying purchases.';
+const AFFILIATE_NOTE = 'This is an affiliate link. If you buy through it, I may earn a small commission at no extra cost to you.';
 
 const KNOWN_FIELDS = new Set([
     'title',
@@ -168,7 +170,7 @@ function loadPost(filePath) {
 
     let affiliateUrl;
     try {
-        affiliateUrl = new URL(requireString(data, 'affiliateUrl', filename)).href;
+        affiliateUrl = withAssociateTag(new URL(requireString(data, 'affiliateUrl', filename)).href);
     } catch (error) {
         throw new Error(`${filename}: "affiliateUrl" must be a full URL. ${error.message}`);
     }
@@ -264,16 +266,69 @@ function isAmazonUrl(url) {
     }
 }
 
+function isAmazonComHost(hostname) {
+    const host = String(hostname || '').toLowerCase().replace(/\.$/, '');
+    return host === 'amazon.com' || host.endsWith('.amazon.com');
+}
+
+function extractAsin(pathname) {
+    const match = /\/(?:dp|gp\/product|gp\/aw\/d)\/([A-Z0-9]{10})(?=[/?#]|$)/i.exec(pathname || '');
+    return match ? match[1].toUpperCase() : '';
+}
+
+function decodeHtml(value) {
+    return String(value)
+        .replace(/&amp;/g, '&')
+        .replace(/&lt;/g, '<')
+        .replace(/&gt;/g, '>')
+        .replace(/&quot;/g, '"')
+        .replace(/&#39;/g, "'");
+}
+
+/**
+ * Point amazon.com links at the Associates tag. Replaces any existing tag
+ * (including duplicates and different casing) and keeps every other query
+ * parameter. Product links are rewritten to https://www.amazon.com/dp/ASIN.
+ */
+function withAssociateTag(rawUrl) {
+    let parsed;
+    try {
+        parsed = new URL(rawUrl);
+    } catch {
+        return rawUrl;
+    }
+    if (!isAmazonComHost(parsed.hostname)) return rawUrl;
+
+    const asin = extractAsin(parsed.pathname);
+    if (asin) {
+        const next = new URL(`https://www.amazon.com/dp/${asin}`);
+        parsed.searchParams.forEach((value, key) => {
+            if (key.toLowerCase() === 'tag') return;
+            next.searchParams.append(key, value);
+        });
+        next.searchParams.set('tag', ASSOCIATE_TAG);
+        next.hash = parsed.hash;
+        return next.href;
+    }
+
+    const tagKeys = [];
+    parsed.searchParams.forEach((_, key) => {
+        if (key.toLowerCase() === 'tag') tagKeys.push(key);
+    });
+    tagKeys.forEach((key) => parsed.searchParams.delete(key));
+    parsed.searchParams.set('tag', ASSOCIATE_TAG);
+    return parsed.href;
+}
+
 function inlineMarkdown(text) {
     let html = escapeHtml(text);
     html = html.replace(/!\[([^\]]*)\]\(([^)\s]+)\)/g, (_, alt, url) => {
         return `<img src="${url}" alt="${alt}" loading="lazy">`;
     });
     html = html.replace(/\[([^\]]+)\]\(([^)\s]+)\)/g, (_, label, url) => {
-        const decoded = url.replace(/&amp;/g, '&');
-        const affiliate = isAmazonUrl(decoded);
-        const extra = affiliate ? ' target="_blank" rel="sponsored nofollow noopener"' : '';
-        return `<a href="${url}"${extra}>${label}</a>`;
+        const tagged = withAssociateTag(decodeHtml(url));
+        const extra = isAmazonUrl(tagged) ? ' target="_blank" rel="sponsored nofollow noopener"' : '';
+        return `<a href="${escapeHtml(tagged)}"${extra}>${label}</a>`;
     });
     html = html.replace(/`([^`]+)`/g, '<code>$1</code>');
     html = html.replace(/\*\*([^*]+)\*\*/g, '<strong>$1</strong>');
@@ -405,8 +460,14 @@ function disclosureHtml(extraClass) {
     return `<p class="${classes}">${escapeHtml(DISCLOSURE)}</p>`;
 }
 
+function affiliateNoteHtml(extraClass) {
+    const classes = extraClass ? `affiliate-note affiliate-disclosure ${extraClass}` : 'affiliate-note affiliate-disclosure';
+    return `<p class="${classes}">${escapeHtml(AFFILIATE_NOTE)}</p>`;
+}
+
 function amazonButton(url) {
-    return `<a class="amazon-button" href="${escapeHtml(url)}" target="_blank" rel="sponsored nofollow noopener"><i class="fa-brands fa-amazon" aria-hidden="true"></i> Check price on Amazon</a>`;
+    const tagged = withAssociateTag(url);
+    return `<a class="amazon-button" href="${escapeHtml(tagged)}" target="_blank" rel="sponsored nofollow noopener"><i class="fa-brands fa-amazon" aria-hidden="true"></i> Check price on Amazon</a>`;
 }
 
 function socialHtml() {
@@ -760,6 +821,7 @@ function renderPost(post) {
                     ${post.draft ? '<p class="rating-note">Placeholder score for the template.</p>' : ''}
                     <p class="verdict-text">${escapeHtml(post.verdict)}</p>
                     ${amazonButton(post.affiliateUrl)}
+                    ${affiliateNoteHtml('review-disclosure tight')}
                     ${disclosureHtml('review-disclosure tight')}
                 </aside>
             </div>
@@ -778,6 +840,7 @@ function renderPost(post) {
             </div>
             <div class="review-end">
                 ${amazonButton(post.affiliateUrl)}
+                ${affiliateNoteHtml('review-disclosure')}
                 ${disclosureHtml('review-disclosure')}
                 <p class="back-link"><a href="${depth === 1 ? 'index.html' : '../index.html'}"><i class="fa-solid fa-arrow-left" aria-hidden="true"></i> All reviews</a></p>
             </div>
@@ -917,6 +980,42 @@ function verifySharedNav() {
     });
 }
 
+function amazonTagValues(url) {
+    const tags = [];
+    url.searchParams.forEach((value, key) => {
+        if (key.toLowerCase() === 'tag') tags.push(value);
+    });
+    return tags;
+}
+
+function assertAmazonLinksTagged(html, label) {
+    const re = /href="([^"]*amazon\.com[^"]*)"/gi;
+    let match;
+    let found = 0;
+    while ((match = re.exec(html))) {
+        found += 1;
+        const href = decodeHtml(match[1]);
+        let url;
+        try {
+            url = new URL(href);
+        } catch (error) {
+            throw new Error(`${label} has an unreadable Amazon link: ${href}`);
+        }
+        const tags = amazonTagValues(url);
+        assert(
+            tags.length === 1 && tags[0] === ASSOCIATE_TAG,
+            `${label} must use a single tag=${ASSOCIATE_TAG} on ${href}`
+        );
+    }
+    return found;
+}
+
+function assertFooterDisclosure(html, label) {
+    const footerStart = html.lastIndexOf('<footer');
+    assert(footerStart !== -1, `${label} is missing a footer.`);
+    assert(html.slice(footerStart).includes(DISCLOSURE), `${label} footer is missing the Amazon disclosure.`);
+}
+
 function verifyHomeLatest(posts) {
     const html = fs.readFileSync(path.join(ROOT, 'index.html'), 'utf8');
     const start = html.indexOf(LATEST_START);
@@ -927,6 +1026,7 @@ function verifyHomeLatest(posts) {
     assert(block.includes('>See all reviews</a>'), 'Homepage strip is missing the See all reviews link.');
     assert(block.includes('href="reviews/index.html"'), 'See all reviews should point at the reviews index.');
     assert(block.includes(DISCLOSURE), 'Homepage strip is missing the Amazon disclosure.');
+    assertAmazonLinksTagged(block, 'homepage latest reviews');
 
     const latest = publishedPosts(posts).slice(0, 3);
     let cursor = -1;
@@ -952,9 +1052,16 @@ function verifyOutput(posts) {
     const sitemap = fs.readFileSync(path.join(ROOT, 'sitemap.xml'), 'utf8');
     const feed = fs.readFileSync(path.join(REVIEWS_DIR, 'feed.xml'), 'utf8');
     assert(listing.includes(DISCLOSURE), 'Listing page is missing the Amazon disclosure.');
+    assertFooterDisclosure(listing, 'reviews/index.html');
+    assertAmazonLinksTagged(listing, 'reviews/index.html');
     assertSharedNav(listing, 'reviews/index.html');
     verifySharedNav();
     verifyHomeLatest(posts);
+    ['index.html', 'about.html', 'contact.html', 'blog1.html', 'myResume.html'].forEach((file) => {
+        const page = fs.readFileSync(path.join(ROOT, file), 'utf8');
+        assertFooterDisclosure(page, file);
+        assertAmazonLinksTagged(page, file);
+    });
     ['about.html', 'contact.html'].forEach((page) => {
         assert(sitemap.includes(`${SITE_ORIGIN}/${page}`), `${page} is missing from the sitemap.`);
     });
@@ -972,9 +1079,18 @@ function verifyOutput(posts) {
         const html = fs.readFileSync(file, 'utf8');
         assertSharedNav(html, post.slug);
         assert(html.includes(DISCLOSURE), `${post.slug} is missing the Amazon disclosure.`);
+        assertFooterDisclosure(html, post.slug);
+        assert(html.includes(AFFILIATE_NOTE), `${post.slug} is missing the affiliate note.`);
+        assert(html.split(AFFILIATE_NOTE).length - 1 >= 2, `${post.slug} should show the affiliate note beside each buy link.`);
+        assert(html.indexOf('class="amazon-button"') < html.indexOf(AFFILIATE_NOTE), `${post.slug} affiliate note should follow the buy link.`);
         assert(html.includes('rel="sponsored nofollow noopener"'), `${post.slug} affiliate link is missing rel.`);
         assert(html.includes('target="_blank"'), `${post.slug} affiliate link must open in a new tab.`);
         assert(html.includes('Check price on Amazon'), `${post.slug} is missing the Amazon button.`);
+        if (isAmazonComHost(new URL(post.affiliateUrl).hostname)) {
+            assert(assertAmazonLinksTagged(html, post.slug) >= 2, `${post.slug} should tag both Amazon buttons.`);
+            assert(html.includes(`tag=${ASSOCIATE_TAG}`), `${post.slug} is missing the Associates tag.`);
+            assert(!html.includes('tag=example-20') && !html.includes('tag=YOUR-ASSOCIATE-TAG-20'), `${post.slug} still has a placeholder Associates tag.`);
+        }
         assert(html.includes('<meta name="description"'), `${post.slug} is missing a meta description.`);
         assert(html.includes('property="og:title"'), `${post.slug} is missing Open Graph tags.`);
 
@@ -1022,10 +1138,31 @@ function selfTest() {
     const sorted = [older, newer].sort(comparePosts);
     assert(sorted[0].slug === 'newer-thing', 'Newest post should sort first.');
 
+    const plain = withAssociateTag('https://www.amazon.com/dp/B0GFMZDTL4');
+    assert(plain === 'https://www.amazon.com/dp/B0GFMZDTL4?tag=maccyberpro-20', `Plain product URL was ${plain}`);
+    const replaced = withAssociateTag('https://www.amazon.com/dp/B0GFMZDTL4?tag=example-20');
+    assert(replaced === 'https://www.amazon.com/dp/B0GFMZDTL4?tag=maccyberpro-20', `Tag replace was ${replaced}`);
+    const kept = withAssociateTag('https://www.amazon.com/dp/B0GFMZDTL4?psc=1&tag=old-20');
+    assert(kept === 'https://www.amazon.com/dp/B0GFMZDTL4?psc=1&tag=maccyberpro-20', `Extra params were ${kept}`);
+    const messy = withAssociateTag('https://smile.amazon.com/Widget-Name/dp/B0GFMZDTL4/ref=sr_1_1?keywords=treadmill&tag=other-20&tag=second-20&psc=1#details');
+    assert(
+        messy === 'https://www.amazon.com/dp/B0GFMZDTL4?keywords=treadmill&psc=1&tag=maccyberpro-20#details',
+        `Clean URL was ${messy}`
+    );
+    assert(withAssociateTag(messy) === messy, 'Tagging should be idempotent.');
+    assert(withAssociateTag('https://www.amazon.com/s?k=helmet&Tag=OLD-20') === 'https://www.amazon.com/s?k=helmet&tag=maccyberpro-20', 'Search URLs should replace tag once.');
+    assert(withAssociateTag('https://amzn.to/abc123') === 'https://amzn.to/abc123', 'Short links should be left as written.');
+    assert(withAssociateTag('https://www.amazon.co.uk/dp/B0GFMZDTL4') === 'https://www.amazon.co.uk/dp/B0GFMZDTL4', 'Non-US Amazon hosts stay untouched.');
+    assert(withAssociateTag('https://example.com/dp/B0GFMZDTL4?tag=nope') === 'https://example.com/dp/B0GFMZDTL4?tag=nope', 'Other hosts stay untouched.');
+
     const page = renderPost(newer);
+    assert(page.includes('https://www.amazon.com/dp/B0EXAMPLE?tag=maccyberpro-20'), 'Self-test missed the Associates tag.');
+    assert(!page.includes('tag=example-20'), 'Self-test left the old tag in place.');
     assert(page.includes('rel="sponsored nofollow noopener"'), 'Self-test missed sponsored rel.');
     assert(page.includes('target="_blank"'), 'Self-test missed target blank.');
     assert(page.includes(DISCLOSURE), 'Self-test missed disclosure.');
+    assert(page.includes(AFFILIATE_NOTE), 'Self-test missed the affiliate note.');
+    assert(page.indexOf('class="amazon-button"') < page.indexOf(AFFILIATE_NOTE), 'Affiliate note should sit with the buy link.');
     assert(page.includes('"@type":"Review"') && page.includes('"@type":"Product"'), 'Self-test missed JSON-LD.');
     assert(page.includes('<meta property="og:title"'), 'Self-test missed Open Graph.');
     assertSharedNav(page, 'review self-test');
@@ -1038,7 +1175,15 @@ function selfTest() {
     assert(draftNav.includes('href="../index.html" class="nav-reviews nav-active"'), 'Draft Reviews link is wrong.');
 
     const bodyLink = markdownToHtml(older.body);
+    assert(bodyLink.includes('href="https://www.amazon.com/dp/B0EXAMPLE?tag=maccyberpro-20"'), 'Amazon links in the write-up need the Associates tag.');
+    assert(!bodyLink.includes('tag=example-20'), 'Write-up links should not keep a different tag.');
     assert(bodyLink.includes('rel="sponsored nofollow noopener"'), 'Amazon links in the write-up need the sponsored rel.');
+    const messyLink = markdownToHtml('Buy the [treadmill](https://www.amazon.com/Advzon-Treadmill/dp/B0GFMZDTL4/ref=sr_1_1?psc=1&tag=old-20).');
+    assert(messyLink.includes('href="https://www.amazon.com/dp/B0GFMZDTL4?psc=1&amp;tag=maccyberpro-20"'), 'Write-up product links should stay clean and keep other params.');
+    assert(messyLink.includes('rel="sponsored nofollow noopener"'), 'Cleaned write-up links still need sponsored rel.');
+    const otherLink = markdownToHtml('See [site](https://example.com/dp/B0GFMZDTL4?tag=nope).');
+    assert(otherLink.includes('href="https://example.com/dp/B0GFMZDTL4?tag=nope"'), 'Non-Amazon links must stay unchanged.');
+    assert(!otherLink.includes('sponsored'), 'Non-Amazon links must not be marked sponsored.');
 
     const draft = renderPost({ ...older, draft: true, slug: 'draft-thing' });
     assert(draft.includes('noindex, nofollow'), 'Draft self-test should noindex.');
@@ -1080,5 +1225,8 @@ module.exports = {
     renderPost,
     renderListing,
     renderHomeLatest,
+    withAssociateTag,
+    ASSOCIATE_TAG,
     DISCLOSURE,
+    AFFILIATE_NOTE,
 };

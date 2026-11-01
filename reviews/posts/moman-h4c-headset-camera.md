@@ -17,7 +17,7 @@ cons:
   - "Wired mount lets the unit wobble; I don't fully trust it at speed"
   - "Awkward mounting angle limits what the camera sees"
   - "No intercom function"
-affiliateUrl: "https://www.amazon.com/dp/B0GZPQJ7MW"
+affiliateUrl: "https://www.amazon.com/dp/B0GZPQJ7MW?tag=maccyberpro-20"
 draft: false
 ---
 

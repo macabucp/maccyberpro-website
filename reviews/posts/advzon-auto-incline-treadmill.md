@@ -16,7 +16,7 @@ cons:
   - "Running deck is too small for jogging"
   - "Side rails sit close, so my arms hit them while walking"
   - "Bigger users will feel cramped"
-affiliateUrl: "https://www.amazon.com/dp/B0GFMZDTL4"
+affiliateUrl: "https://www.amazon.com/dp/B0GFMZDTL4?tag=maccyberpro-20"
 draft: false
 ---
 

@@ -14,7 +14,7 @@ pros:
   - "Comfortable fit and compact case"
 cons:
   - "None that mattered to me; audiophiles may want a pricier pair"
-affiliateUrl: "https://www.amazon.com/dp/B0CRTYZG5C"
+affiliateUrl: "https://www.amazon.com/dp/B0CRTYZG5C?tag=maccyberpro-20"
 draft: false
 ---
 

@@ -14,7 +14,7 @@ pros:
   - "Comfortable for long listening sessions"
 cons:
   - "None that mattered to me; Sony's pricier models go further on noise canceling"
-affiliateUrl: "https://www.amazon.com/dp/B0BS74M665"
+affiliateUrl: "https://www.amazon.com/dp/B0BS74M665?tag=maccyberpro-20"
 draft: false
 ---
 

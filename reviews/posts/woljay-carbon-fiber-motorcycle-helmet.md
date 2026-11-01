@@ -14,7 +14,7 @@ pros:
   - "Easy to install a Sena intercom"
 cons:
   - "Nothing major after riding with it since May 2025"
-affiliateUrl: "https://www.amazon.com/dp/B08NK8ZKQK"
+affiliateUrl: "https://www.amazon.com/dp/B08NK8ZKQK?tag=maccyberpro-20"
 draft: false
 ---
 

@@ -14,7 +14,7 @@ pros:
   - "Black powder coat looks clean under the bumper"
 cons:
   - "Included bolts weren't the right size for my install, so I had to order bolts with the correct threads"
-affiliateUrl: "https://www.amazon.com/dp/B0DK1GXZT1"
+affiliateUrl: "https://www.amazon.com/dp/B0DK1GXZT1?tag=maccyberpro-20"
 draft: false
 ---
 

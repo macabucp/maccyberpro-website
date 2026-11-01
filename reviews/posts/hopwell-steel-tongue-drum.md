@@ -14,7 +14,7 @@ pros:
   - "Builds a real interest in music"
 cons:
   - "None that mattered to us"
-affiliateUrl: "https://www.amazon.com/dp/B09X33DD28"
+affiliateUrl: "https://www.amazon.com/dp/B09X33DD28?tag=maccyberpro-20"
 draft: false
 ---
 

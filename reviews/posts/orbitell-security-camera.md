@@ -14,7 +14,7 @@ pros:
   - "Pairs well with the Orbitell doorbell"
 cons:
   - "None that mattered to me"
-affiliateUrl: "https://www.amazon.com/dp/B0DK253C77"
+affiliateUrl: "https://www.amazon.com/dp/B0DK253C77?tag=maccyberpro-20"
 draft: false
 ---
 

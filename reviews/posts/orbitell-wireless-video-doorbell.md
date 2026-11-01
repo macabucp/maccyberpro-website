@@ -14,7 +14,7 @@ pros:
   - "See and answer who's at the door from your phone"
 cons:
   - "None that mattered to me"
-affiliateUrl: "https://www.amazon.com/dp/B0DJXK13T2"
+affiliateUrl: "https://www.amazon.com/dp/B0DJXK13T2?tag=maccyberpro-20"
 draft: false
 ---
 

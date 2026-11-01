@@ -14,7 +14,7 @@ pros:
   - "CarPlay and a dash cam in one unit"
 cons:
   - "Included wire is short, which limits how neatly you can route it"
-affiliateUrl: "https://www.amazon.com/dp/B0GJCCZXYS"
+affiliateUrl: "https://www.amazon.com/dp/B0GJCCZXYS?tag=maccyberpro-20"
 draft: false
 ---
 

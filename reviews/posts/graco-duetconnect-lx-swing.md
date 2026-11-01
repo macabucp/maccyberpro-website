@@ -15,7 +15,7 @@ pros:
 cons:
   - "Attaching the legs is fiddly, with cramped wires that can get pinched or torn"
   - "The toys on the mobile don't spin"
-affiliateUrl: "https://www.amazon.com/dp/B095L52T3Z"
+affiliateUrl: "https://www.amazon.com/dp/B095L52T3Z?tag=maccyberpro-20"
 draft: false
 ---
 

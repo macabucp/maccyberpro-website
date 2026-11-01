@@ -38,7 +38,7 @@ pros:
   - "What you liked"
 cons:
   - "What you did not like"
-affiliateUrl: "https://www.amazon.com/dp/ASIN?tag=yourtag-20"
+affiliateUrl: "https://www.amazon.com/dp/ASIN?tag=maccyberpro-20"
 draft: false
 ---
 ```
@@ -55,7 +55,7 @@ draft: false
 | `verdict` | yes | Short line next to the stars. |
 | `pros` | yes | YAML list. At least one item. Plain text. |
 | `cons` | yes | YAML list. At least one item. Plain text. |
-| `affiliateUrl` | yes | Full Amazon URL, including your Associates tag as `tag=yourtag-20`. |
+| `affiliateUrl` | yes | Full Amazon URL. Use `https://www.amazon.com/dp/ASIN?tag=maccyberpro-20`. The build adds or replaces `tag=maccyberpro-20` on amazon.com links and keeps any other query parameters. |
 | `productName` | no | Defaults to `title`. Used for the photo alt text and structured data. |
 | `brand` | no | Included in Product structured data when set. |
 | `author` | no | Defaults to Christopher Macabugao. |
@@ -72,9 +72,9 @@ Under the closing `---`, write normal Markdown:
 - paragraphs, `**bold**`, `*italic*`, lists, quotes, and images
 - links
 
-Amazon links in the write-up (`amazon.` and `amzn.to`) are given `rel="sponsored nofollow noopener"` and open in a new tab. The **Check price on Amazon** button is built from `affiliateUrl` and uses that same relationship. You do not add the button yourself.
+Amazon links in the write-up (`amazon.` and `amzn.to`) are given `rel="sponsored nofollow noopener"` and open in a new tab. `amazon.com` links are also rewritten to `tag=maccyberpro-20` (a product link becomes `https://www.amazon.com/dp/ASIN?tag=maccyberpro-20`). The **Check price on Amazon** button is built from `affiliateUrl` and uses that same relationship. You do not add the button yourself. Each button is followed by: "This is an affiliate link. If you buy through it, I may earn a small commission at no extra cost to you."
 
-Every review page prints: "As an Amazon Associate I earn from qualifying purchases." The same line is in the site footer.
+Every page footer, including generated review pages, prints: "As an Amazon Associate I earn from qualifying purchases." Review pages and the homepage Latest Reviews strip print that line too.
 
 Published reviews get a page title, meta description, Open Graph tags, Product/Review JSON-LD, a sitemap entry, and an RSS item. The feed is `reviews/feed.xml`. The sitemap is `sitemap.xml`.
 

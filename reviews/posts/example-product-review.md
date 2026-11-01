@@ -14,7 +14,7 @@ pros:
   - "Example pro — a second firsthand point"
 cons:
   - "Example con — replace with what you actually disliked"
-affiliateUrl: "https://www.amazon.com/?tag=YOUR-ASSOCIATE-TAG-20"
+affiliateUrl: "https://www.amazon.com/?tag=maccyberpro-20"
 draft: true
 ---
 
@@ -26,6 +26,6 @@ Replace this text with the firsthand write-up: what you bought, how you used it,
 
 ## What you can leave out of the markdown
 
-The page already prints the Amazon Associates disclosure. It also builds the **Check price on Amazon** button from `affiliateUrl`. You do not paste that button into the file.
+The page already prints the Amazon Associates disclosure and a short affiliate note beside the buy button. It also builds the **Check price on Amazon** button from `affiliateUrl`. You do not paste that button into the file.
 
-An Amazon link you do put in the write-up, such as [this placeholder](https://www.amazon.com/?tag=YOUR-ASSOCIATE-TAG-20), is marked as a sponsored link automatically.
+An Amazon link you do put in the write-up, such as [this placeholder](https://www.amazon.com/?tag=maccyberpro-20), is marked as a sponsored link and tagged automatically.

@@ -6,6 +6,7 @@ summary: "A dependable home security camera that works as intended and pairs nic
 rating: 5
 productName: "Orbitell Security Camera"
 brand: "Orbitell"
+image: "images/orbitell-camera.jpg"
 verdict: "A dependable security camera that works as intended and pairs nicely with the Orbitell doorbell."
 pros:
   - "Works reliably, as advertised"
